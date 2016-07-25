@@ -11,12 +11,9 @@
 
 # VBUS Client Device
 
- (c) 2014 Arno Willig <akw@bytefeed.de>
- 
-  2014-03-03 19:33:15Z akw 
+ (c) 2014 Arno Willig <akw@bytefeed.de>  2014-03-03 19:33:15Z akw 
 
-
-21_VBUSDEV.pm   VBUS Client Device 
+# 21_VBUSDEV.pm   VBUS Client Device 
 
 
 http://danielwippermann.github.io/resol-vbus/index.html

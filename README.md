@@ -18,6 +18,14 @@
 
 http://danielwippermann.github.io/resol-vbus/index.html
 
+
+
+The Perl modules can be loaded directly into your FHEM installation:
+
+ update all https://raw.githubusercontent.com/pejonp/vbus/master/controls_vbus.txt
+
+
+
 Hier die schon hinterlegten Geräte. 
 ======
 

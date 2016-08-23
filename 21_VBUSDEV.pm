@@ -279,12 +279,12 @@ my %VBUS_devices = (
 			{ "offset" =>  4,"name" => "Betriebsart","bitSize" => 8,"factor" => 1 },
 			{ "offset" =>  6,"name" => "Brennerstarts1","bitSize" => 8,"factor" => 1 },
 			{ "offset" =>  8,"name" => "Brennerstarts2","bitSize" => 8,"factor" => 1 },
-      { "offset" =>  10,"name" => Brennerstarts3","bitSize" => 8,"factor" => 1 },
-      { "offset" =>  12,"name" => Brennerstarts4","bitSize" => 8,"factor" => 1 },
+      { "offset" =>  10,"name" => "Brennerstarts3","bitSize" => 8,"factor" => 1 },
+      { "offset" =>  12,"name" => "Brennerstarts4","bitSize" => 8,"factor" => 1 },
 	    ]},       
   "5420" => {"name" => "DeltaThermHC_WMZ", "cmd" => "0100", "fields" => [ 	
 			{ "offset" =>  0,"name" => "Wert","bitSize" => 32,"factor" => 1,"unit" => "kWh" },
-			{ "offset" =>  4,"name" => "Leistung","bitSize" => 32,"unit" => "W" }
+			{ "offset" =>  4,"name" => "Leistung","bitSize" => 32,"unit" => "W" },
 			{ "offset" =>  8,"name" => "WertHeute","bitSize" => 32,"factor" => 1,"unit" => "kWh" },
       { "offset" =>  12,"name" => "WertWoche","bitSize" => 32,"factor" => 1,"unit" => "kWh" },
 	    ]},   
@@ -298,9 +298,9 @@ my %VBUS_devices = (
       { "offset" =>  10,"name" => "Mischer_Auf","bitSize" => 8,"factor" => 1,"unit" => "%" },
       { "offset" =>  11,"name" => "Mischer_Zu","bitSize" => 8,"factor" => 1,"unit" => "%" },
       { "offset" =>  12,"name" => "Datum","bitSize" => 32,"factor" => 1,"unit" => "Tage" },
-      { "offset" =>  16,"name" => "Uhrzeit","bitSize" => 16,"factor" => 1,"unit" => "h" },
-      { "offset" =>  18,"name" => "Systemmeldung","bitSize" => 8,"factor" => 1,"unit" => "m" },
-       ]},
+      { "offset" =>  18,"name" => "Uhrzeit","bitSize" => 16,"factor" => 1,"unit" => "h" },
+      { "offset" =>  20,"name" => "Systemmeldung","bitSize" => 8,"factor" => 1,"unit" => "m" },
+      ]},
    "6521" => {"name" => "MSR65_1", "cmd" => "0200", "fields" => [
  #  "7821" => {"name" => "MSR65_1", "cmd" => "0200", "fields" => [
   		{ "offset" => 0, "name" => "Temperatur_1", "bitSize" => 15, "factor" => 0.1, "unit" => "°C" },

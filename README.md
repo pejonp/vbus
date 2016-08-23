@@ -27,13 +27,18 @@ Hier die schon hinterlegten Geräte.
 |0053 |  DL_3 |
 |1060|Vitosolic200_SD4|
 |1065|Vitosolic200_WMZ1|
-|1066|Vitosolic200_WMZ2
+|1066|Vitosolic200_WMZ2|
+|1059|DeltaThermHC_mini_Regler| 23.08.2016
+|1140|DeltaThermHC_mini_HK| 23.08.2016
 |2251|DeltaSol_SL|
 |4010|WMZ|
 |4211|SKSC1/2|
 |4212|DeltaSolC|
 |4278|DeltaSol_BS4|
-|427B| DeltaSol_BS_2009|
+|427B|DeltaSol_BS_2009|
+|5400|DeltaThermHC_Regler| 23.08.2016
+|5410|DeltaThermHC_HK| 23.08.2016
+|5420|DeltaThermHC_WMZ| 23.08.2016
 |5611| DeltaTherm_FK|
 |6521| MSR65_1|
 |7821| MSR65_1|

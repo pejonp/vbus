@@ -43,7 +43,7 @@ my %VBUS_devices = (
 			{ "offset" => 32,"name" => "Temperatur_03","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
 			{ "offset" => 34,"name" => "Temperatur_04","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
 			]},
-  "1059" => {"name" => "DeltaThermHC_mini_Regler", "cmd" => "0100", "fields" => [ 
+  "1059" => {"name" => "DeltaThermHC_mini_Regler", "cmd" => "0100", "fields" => [
       { "offset" => 0, "name" => "Temperatur_Sensor_1", "bitSize" => 15, "factor" => 0.1, "unit" => "°C" },
 			{ "offset" => 2, "name" => "Temperatur_Sensor_2", "bitSize" => 15, "factor" => 0.1, "unit" => "°C" },
 			{ "offset" => 4, "name" => "Temperatur_Sensor_3", "bitSize" => 15, "factor" => 0.1, "unit" => "°C" },
@@ -53,12 +53,12 @@ my %VBUS_devices = (
 			{ "offset" => 11, "name" => "Drehzahl_Relais_2", "bitSize" => 7, "factor" => 1, "unit" => "%" },
 			{ "offset" => 12, "name" => "Drehzahl_Relais_3", "bitSize" => 7, "factor" => 1, "unit" => "%" },
 			{ "offset" => 13, "name" => "Drehzahl_Relais_4", "bitSize" => 7, "factor" => 1, "unit" => "%" },
-     	{ "offset" => 14, "name" => "Regler_Ausgang_1", "bitSize" => 7,  "factor" => 1, "unit" => "%" },
-      { "offset" => 15, "name" => "Regler_Ausgang_2", "bitSize" => 7,  "factor" => 1, "unit" => "%" },
-      { "offset" => 16,"name" => "Systemdatum","bitSize" => 31},
+     	{ "offset" => 14, "name" => "Regler_Ausgang_1", "bitSize" => 7, "factor" => 1, "unit" => "%" },
+      { "offset" => 15, "name" => "Regler_Ausgang_2", "bitSize" => 7, "factor" => 1, "unit" => "%" },
+      { "offset" => 16,"name" => "Systemdatum","bitSize" => 31 },
       { "offset" => 20, "name" => "Fehlermaske", "bitSize" => 31, "factor" => 1 },
 	  	{ "offset" => 24, "name" => "Warnungsmaske", "bitSize" => 31, "factor" => 1 },
- 			]},    
+ 			]},
   "1060" => {"name" => "Vitosolic200_SD4", "cmd" => "0100", "fields" => [ 	
 			{ "offset" =>  0,"name" => "temperature_T01","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
 			{ "offset" =>  2,"name" => "temperature_T02","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
@@ -117,8 +117,7 @@ my %VBUS_devices = (
 			{ "offset" =>  6,"name" => "HK_Brennerstarts1","bitSize" => 8,"factor" => 1 },
 			{ "offset" =>  8,"name" => "HK_Brennerstarts2","bitSize" => 8,"factor" => 1 },
       { "offset" =>  10,"name" => "HK_Brennerstarts3","bitSize" => 8,"factor" => 1 },
-	    ]},   
-      
+	    ]},
   "2251" => {"name" => "DeltaSol_SL", "cmd" => "0100", "fields" => [
 #			{ "offset" => 0, "name" => "Systemzeit", "bitSize" => 31, "timeRef" => 1 },
 			{ "offset" => 4, "name" => "Kollektortemperatur", "bitSize" => 15, "factor" => 0.1, "unit" => "°C" },

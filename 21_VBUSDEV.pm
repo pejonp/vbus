@@ -4,7 +4,7 @@
 # (c) 2014 Arno Willig <akw@bytefeed.de>
 #
 #  2014-03-03 19:33:15Z akw 
-# $Id: 21_VBUSDEV.pm 20160823 2016-08-23 10:10:10Z awk+pejonp $
+# $Id: 21_VBUSDEV.pm 20161003 2016-10-03 10:10:10Z awk+pejonp $
 
 package main;
 

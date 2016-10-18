@@ -253,6 +253,8 @@ sub VBUSIF_DecodePayload($@)
   Examples:
   <ul>
     <code>define vbus VBUSIF 192.168.1.69:7053</code>
+    </ul>
+    <ul>
     <code>define vbus VBUSIF  /dev/ttyS0</code>
   </ul>
   </ul>

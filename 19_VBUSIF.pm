@@ -1,4 +1,4 @@
-# $Id: 19_VBUSIF.pm 20160725 2016-07-25 03:54:15Z awk+pejonp $
+# $Id: 19_VBUSIF.pm 20161112 2016-11-12 03:54:15Z awk+pejonp $
 # VBUS LAN Adapter Device
 #
 # (c) 2014 Arno Willig <akw@bytefeed.de>
@@ -89,7 +89,7 @@ sub VBUSIF_DoInit($)
 		my $conn = $hash->{TCPDev};
 		$conn->autoflush(1);
 		$conn->getline();
-		$conn->write("PASS vbus#\n");
+		$conn->write("PASS vbus\n");
 		$conn->getline();
 		$conn->write("DATA\n");
 		$conn->getline();
@@ -126,66 +126,78 @@ sub VBUSIF_Read($@)
 	$data .= $buf;
   
 	my $msg;
+  my $msg2;
 	my $idx;
-	$idx = index($data,"aa");
-  Log3 $hash, 4,"$name: VBUSIF_Read: index = $data";
+  my $muster = "aa";
+	$idx = index($data,$muster);
+  Log3 $hash, 4,"$name: VBUSIF_Read0: index = $data";
 	if ($idx>=0) {
+    $msg2 = $data;
 		$data = substr($data,$idx); # Cut off beginning
-
-		$idx = index($data,"aa",2); # Find next message
+  	$idx = index($data,$muster,2); # Find next message
 
 		if ($idx>0) {
-
 			$msg = substr($data,0,$idx);
 			$data = substr($data,$idx);
 			my $protoVersion = substr($msg,10,2);
-	Log3 $hash, 4,"$name: VBUSIF_Read: protoVersion : $protoVersion";
-  	if ($protoVersion == "10" && length($msg)>=20) {
-				my $frameCount = hex(substr($msg,16,2));
-				my $headerCRC  = hex(substr($msg,18,2));
-
-				my $crc = 0;
-				for (my $j = 1; $j<=8;$j++) {
-					$crc += hex(substr($msg,$j*2,2));
-				}
-				$crc = ($crc ^ 0xff) & 0x7f;
-				if ($headerCRC != $crc) {
-	Log3 $hash, 3, "$name: Wrong checksum: $crc != $headerCRC";
-				} else {
-					my $len = 20+12*$frameCount;
-					#if ($len != length($msg)) {
-					if ($len != length($msg) && length($msg) != 247) {
-						Log3 $hash, 4,"$name: Wrong message length: $len != ".length($msg);
-					} else {
-						if(length($msg) == 247) {
-							$msg = $msg."a";
-						}
-						my $payload = VBUSIF_DecodePayload($hash,$msg);
-						if (defined $payload) {
-							$msg = substr($msg,0,20).$payload;
-
-							$hash->{"${name}_MSGCNT"}++;
-							$hash->{"${name}_TIME"} = TimeNow();
-							$hash->{RAWMSG} = $msg;
-							my %addvals = (RAWMSG => $msg);
-							Dispatch($hash, $msg, \%addvals) if($init_done);
-	  					}
-					}
-					
-				}
-
-			}
+    	Log3 $hash, 4,"$name: VBUSIF_Read1: protoVersion : $protoVersion";
+      
+  	  if ($protoVersion == "10" && length($msg)>=20) {
+			  	my $frameCount = hex(substr($msg,16,2));
+				  my $headerCRC  = hex(substr($msg,18,2));
+  				my $crc = 0;
+	  			for (my $j = 1; $j<=8;$j++) {
+		  			$crc += hex(substr($msg,$j*2,2));
+			  	}
+				  $crc = ($crc ^ 0xff) & 0x7f;
+				  if ($headerCRC != $crc) {
+	             Log3 $hash, 3, "$name: VBUSIF_Read2: Wrong checksum: $crc != $headerCRC";
+				    } else {
+					     my $len = 20+12*$frameCount;
+               Log3 $hash, 4,"$name: VBUSIF_Read2a Len: ".$len." Counter: ".$frameCount;
+      				 if ($len != length($msg)){
+               # Fehler bei aa1000277310000103414a7f1300071c00001401006a62023000016aaa000021732000050000000000000046a
+               #                                                                   ^ hier wird falsch getrennt
+                  $msg = substr($msg2,0,$len);
+                   Log3 $hash, 4,"$name: VBUSIF_Read2b MSG: ".$msg;
+               }
+               
+               if ($len != length($msg)) {
+			     		 #if ($len != length($msg) && length($msg) != 247) {
+                Log3 $hash, 4,"$name: VBUSIF_Read3: Wrong message length: $len != ".length($msg);
+					      } else {
+                   Log3 $hash, 4,"$name:  VBUSIF_Read4: OK message length: $len : ".length($msg);
+						       if(length($msg) == 247) {
+						     	     $msg = $msg."a";
+                       Log3 $hash, 4,"$name: VBUSIF_Read5: message + a : ".$msg;
+						       }
+						        my $payload = VBUSIF_DecodePayload($hash,$msg);
+						        if (defined $payload) {
+							        $msg = substr($msg,0,20).$payload;
+                      Log3 $hash, 4,"$name: VBUSIF_Read6 MSG: ".$msg." Payload: ".$payload;
+							        $hash->{"${name}_MSGCNT"}++;
+							        $hash->{"${name}_TIME"} = TimeNow();
+						        	$hash->{RAWMSG} = $msg;
+							        my %addvals = (RAWMSG => $msg);
+							        Dispatch($hash, $msg, \%addvals) if($init_done);
+	  					      }
+					         }
+        			}
+   		}
+      
 			if ($protoVersion == "20") {
 				my $command    = substr($msg,14,2).substr($msg,12,2);
 				my $dataPntId  = substr($msg,16,4);
 				my $dataPntVal = substr($msg,20,8);
 				my $septet     = substr($msg,28,2);
 				my $checksum   = substr($msg,30,2);
+        Log3 $hash, 4,"$name: VBUSIF_Read7: protoVersion : $protoVersion";
 #				TODO use septet
 #				TODO validate checksum
 #				TODO Understand protocol
 
 			}
+      	Log3 $hash, 4,"$name: VBUSIF_Read8: raus ";
 		}
 	}
 
@@ -222,7 +234,7 @@ sub VBUSIF_DecodePayload($@)
 		}
 
 		if ($crc != $frameCRC) {
-		   Log3 $hash, 4,"$name: Wrong checksum: $crc != $frameCRC";
+		   Log3 $hash, 4,"$name: VBUSIF_DecodePayload0: Wrong checksum: $crc != $frameCRC";
 			return undef;
 		}
 	}

@@ -40,6 +40,8 @@ Hier die schon hinterlegten Geräte.
 |1140|DeltaThermHC_mini_HK| 23.08.2016
 |2211|DeltaSol_CS_Plus| 03.10.2016
 |2251|DeltaSol_SL|
+|2271|DeltaSol_SLL|09.11.2016 (https://forum.fhem.de/index.php/topic,10303.msg518538.html#msg518538)
+|2272|DeltaSol_SLL_WMZ1|09.11.2016 (michaelfhem)
 |4010|WMZ|
 |4211|SKSC1/2|
 |4212|DeltaSolC|
@@ -76,3 +78,17 @@ Hier die schon hinterlegten Geräte.
 |7E12| DeltaSol_MX_Module|
 |7E21| DeltaSol_MX_Heizkreis|
 |7E31| DeltaSol_MX_WMZ|
+
+
+VBUS-Decoder
+
+http://hobbyelektronik.org/w/index.php/VBus-Decoder
+
+Hier ein Sketch zum auslesen einer RESOL DeltaSol über die seriele Schnittstelle.
+https://github.com/ESP8266nu/ESPEasyPluginPlayground/blob/master/_P109_RESOL_DeltaSol_Pro.ino
+
+In Kombination mit einem ESP8266 sicher eine gute und preiswerte Lösung. Beim fehlen einer serielen Schnittstelle könnte man den VBUS mit nachfolgender Schaltung nutzen. 
+
+Einfache Schaltung für den lesenden Zugriff auf den VBUS: https://groups.google.com/forum/#!topic/resol-vbus/3CjZffK53ig
+
+Quelle: https://forum.fhem.de/index.php/topic,10303.msg472373.html#msg472373

@@ -49,6 +49,8 @@ Hier die schon hinterlegten Geräte.
 |427B|DeltaSol_BS_2009|
 |5400|DeltaThermHC_Regler| 23.08.2016
 |5410|DeltaThermHC_HK| 23.08.2016
+|5411|DeltaThermHC_HK1| 12.11.2016
+|5412|DeltaThermHC_HK2| 12.11.2016
 |5420|DeltaThermHC_WMZ| 23.08.2016
 |5611| DeltaTherm_FK|
 |6521| MSR65_1|

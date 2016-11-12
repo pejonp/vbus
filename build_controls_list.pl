@@ -1,3 +1,5 @@
+#!/usr/bin/perl
+
 use strict;
 use warnings;
 use File::Find;
@@ -58,9 +60,8 @@ sub listfiles2{
 							
 						print ("changing $modifiy_line");
 	
-					    my $date = POSIX::strftime("%Y-%d-%m", localtime( $fi->{mtime} ));
-	                	my $time = POSIX::strftime("%H:%M:%S", localtime( $fi->{mtime} ));
-					
+					  my $date = POSIX::strftime("%Y-%d-%m", localtime( $fi->{mtime} ));
+	          my $time = POSIX::strftime("%H:%M:%S", localtime( $fi->{mtime} ));
 						my @line_parts = split (" ",$modifiy_line);
 						@line_parts[2] = fileparse($file,"");
 						@line_parts[3] = $fi->{size};

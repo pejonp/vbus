@@ -4,7 +4,7 @@
 # (c) 2014 Arno Willig <akw@bytefeed.de>
 #
 #  2014-03-03 19:33:15Z akw 
-# $Id: 21_VBUSDEV.pm 20161112 2016-11-12 10:10:10Z awk+pejonp $
+# $Id: 21_VBUSDEV.pm 20161223 2016-12-23 10:10:10Z awk+pejonp $
 
 package main;
 
@@ -519,7 +519,7 @@ my %VBUS_devices = (
 			{ "offset" => 64,"name" => "controllerversion","bitSize" => 16 },
 			#{ "offset" => 66,"name" => "systemtime","bitSize" => 16 },
  			{ "offset" => 66,"name" => "systemtime","bitSize" => 15,"timeRef" => 1 },
-    		]},
+   		]},
 	"7326" => {"name" => "Vitosolic200_WMZ1", "cmd" => "0100", "fields" => [ 	
 			{ "offset" =>  0,"name" => "WMZ1_Vorlauf","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
 			{ "offset" =>  2,"name" => "WMZ1_Ruecklauf","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
@@ -1042,7 +1042,9 @@ sub VBUSDEV_Parse($$)
   
    if ($dst_addr == "0015")
   {
-   		Log3 $iodev, 3, "VBUSDEV_Parse03: Standard-Infos ioName: ".$ioName. " DST-ADR: " . $dst_addr;
+   		
+      Log3 $iodev, 3, "VBUSDEV_Parse03: Standard-Infos ioName: ".$ioName. " DST-ADR: " . $dst_addr;
+      return "";
   }
   
    if ($dst_addr == "0020")
@@ -1066,11 +1068,6 @@ sub VBUSDEV_Parse($$)
       $dst_addr = "0010";
       $src_addr = "6521";     
   }
-  
- 
-	#nur 7160, 7161, 7162, nicht 6521 und 6522
-	#return "" if ($dst_addr != "0010");
-  
   
 	if ( defined $devtype->{dst_addr} ) {
 		if ( $devtype->{dst_addr} ne $dst_addr ) {
@@ -1175,14 +1172,16 @@ sub VBUSDEV_ParsePayload($@)
 			 	$val =  ($val >= 0 ? ceil($val*2)/2 : floor($val*2)/2);
 			}
 		# Runden ende
-			$val = $val." ".$unit;
+			my $val2 = $val." ".$unit;
+      
 			my $fld = $hash->{READINGS}->{$fieldname};
 			my $oldval = "";
 			if ($fld) {
 				$oldval = $fld->{VAL};
 			}
-			readingsBulkUpdate($hash,$fieldname,$val); # if ($val ne $oldval);
-       Log3 $hash, 4, "$name: VBUSDEV_ParsePayload4: code: " . $code ." : " . $fieldname . " = " . $val;
+			readingsBulkUpdate($hash,$fieldname,$val2); # if ($val ne $oldval);
+      #Log3 $hash, 4, "$name: VBUSDEV_ParsePayload4: code: " . $code ." : " . $fieldname . " = " . $val ." ".$unit;
+      Log3 $hash, 4, "$name: VBUSDEV_ParsePayload4: code: " . $code ." : " . $fieldname . " = " . $val2;
      	}
 	}
   
@@ -1218,16 +1217,24 @@ sub VBUSDEV_ParsePayload($@)
 <a name="VBUSDEV"></a>
 <h3>VBUSDEV</h3>
 <ul>
+
+    RESOL-Adapter (USB oder LAN) Info:<br>
+    <a href="http://www.resol.de/">http://www.resol.de/</a><br><br>
+      
+    Information <a href="http://hobbyelektronik.org/w/index.php/VBus-Decoder">  http://hobbyelektronik.org/w/index.php/VBus-Decoder/</a> 
+    or github <a href="https://github.com/pejonp/vbus"> https://github.com/pejonp/vbus </a><br><br><br>
+
+
   <br />
   <a name="VBUSDEV_Define"></a>
   <b>Define</b>
   <ul>
     <code>define &lt;name&gt; VBUSDEV &lt;id&gt; [&lt;interval&gt;]</code><br />
     <br />
-    Defines an micro-inverter device connected to an <a href="#ENECSYSGW">ENECSYSGW</a>.<br /><br />
+    Connects to various RESOL VBus devices<br />
     Examples:
     <ul>
-      <code>define MyVbusDevice VBUSDEV 100123456</code><br />
+      <code>define VBUSDEV_7321 VBUSDEV 7321 </code><br />
     </ul>
   </ul><br />
   <a name="VBUSDEV_Readings"></a>
@@ -1236,5 +1243,40 @@ sub VBUSDEV_ParsePayload($@)
     <li>The readings are dependant of the model of the VBUS device.</li><br />
   </ul><br />
 </ul><br />
+
 =end html
+=begin html_DE
+
+<a name="VBUSDEV"></a>
+<h3>VBUSDEV</h3>
+<ul>
+    Bei dem VBus handelt es sich um eine bidirektionale halbduplex Zweidrahtschnittstelle.<br><br>
+    
+    Notwendig ist dazu ein RESOL-Adapter (USB oder LAN), zu dem hier Informationen zu finden sind:<br>
+    <a href="http://www.resol.de/">http://www.resol.de/</a><br><br>
+      
+    Weitere Informationen hierzu findet man unter <a href="http://hobbyelektronik.org/w/index.php/VBus-Decoder">  http://hobbyelektronik.org/w/index.php/VBus-Decoder/</a> 
+    und auch auf github <a href="https://github.com/pejonp/vbus"> https://github.com/pejonp/vbus </a><br><br><br>
+
+  <br />
+  <a name="VBUSDEV_Define"></a>
+  <b>Define</b>
+  <ul>
+    <code>define &lt;name&gt; VBUSDEV &lt;id&gt; [&lt;interval&gt;]</code><br />
+    <br />
+    Definition eines RESOL VBus Geraetes. Wenn das Geraet schon in der Liste hinterlegt ist, wird es automatisch angelegt.<br />
+    Beispiel:
+    <ul>
+      <code>define VBUSDEV_7321 VBUSDEV 7321 </code><br />
+    </ul>
+  </ul><br />
+  <a name="VBUSDEV_Readings"></a>
+  <b>Readings</b>
+  <ul>
+    <li>The readings are dependant of the model of the VBUS device.</li><br />
+  </ul><br />
+  
+</ul><br />
+
+=end html_DE
 =cut

@@ -1056,7 +1056,7 @@ sub VBUSDEV_Initialize($)
 	$hash->{AttrList}	= "IODev "
                       ."$readingFnAttributes"
 	                    ." model:"  .join(",", sort @modellist);
-	$hash->{AutoCreate}	= { "VBUSDEV.*" => { ATTR => "event-min-interval:.*:120 event-on-change-reading:.* verbose:5 ",FILTER => "%NAME"}
+	$hash->{AutoCreate}	= { "VBUSDEV.*" => { ATTR => "event-min-interval:.*:120 event-on-change-reading:.* verbose:1 ",FILTER => "%NAME"}
 		};
 }
 

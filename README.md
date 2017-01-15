@@ -47,7 +47,7 @@ Hier die schon hinterlegten Geräte.
 |4212|DeltaSolC|
 |4278|DeltaSol_BS4|
 |427B|DeltaSol_BS_2009|
-|5251|Frischwasserregler|
+|5251|Frischwasserregler| 15.01.2017
 |5400|DeltaThermHC_Regler| 23.08.2016
 |5410|DeltaThermHC_HK| 23.08.2016
 |5411|DeltaThermHC_HK1| 12.11.2016
@@ -70,11 +70,11 @@ Hier die schon hinterlegten Geräte.
 |7327| Vitosolic200_WMZ2|  => funktioniert (selber im Einsatz)
 |7331| SLR|
 |7341| CitrinSLR_XT|
-|7342| SLR XT-Erweiterungsmodul 1|
-|7343| SLR XT-Erweiterungsmodul 2|
-|7344| SLR XT-Erweiterungsmodul 3|
-|7345| SLR XT-Erweiterungsmodul 4|
-|7346| SLR XT-Erweiterungsmodul 5|
+|7342| SLR XT-Erweiterungsmodul 1| 15.01.2017
+|7343| SLR XT-Erweiterungsmodul 2| 15.01.2017
+|7344| SLR XT-Erweiterungsmodul 3| 15.01.2017
+|7345| SLR XT-Erweiterungsmodul 4| 15.01.2017
+|7346| SLR XT-Erweiterungsmodul 5| 15.01.2017
 |7411| DeltaSol_ES|
 |7421| DeltaSol_BX|
 |7721| DeltaSolE_Regler|

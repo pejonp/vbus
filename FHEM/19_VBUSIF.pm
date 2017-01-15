@@ -1,9 +1,15 @@
-# $Id: 19_VBUSIF.pm 20161112 2016-11-12 03:54:15Z awk+pejonp $
+##############################################
+# $Id: 19_VBUSIF.pm 201710115 2017-01-15 03:54:15Z awk+pejonp $
+#
 # VBUS LAN Adapter Device
+# 19_VBUSIF.pm
 #
 # (c) 2014 Arno Willig <akw@bytefeed.de>
 # (c) 2015 Frank Wurdinger <frank@wurdinger.de>
 # (c) 2015 Adrian Freihofer <adrian.freihofer gmail com>
+# (c) 2016 Tobias Faust <tobias.faust gmx net>
+# (c) 2016 Jörg (pejonp)
+##############################################  
 
 
 package main;
@@ -63,7 +69,7 @@ sub VBUSIF_Define($$)
 	my %matchList = ( "1:VBUSDEV" => ".*" );
 	$hash->{MatchList} = \%matchList;
 
-  Log3 $hash, 4,"$name: VBUSIF_Define: $hash->{MatchList} ";
+  Log3 $hash, 4,"$name:  VBUSIF_Define: $hash->{MatchList} ";
 
 	DevIo_CloseDev($hash);
 	$hash->{DeviceName} = $dev;
@@ -93,8 +99,8 @@ sub VBUSIF_DoInit($)
 		$conn->getline();
 		$conn->write("DATA\n");
 		$conn->getline();
+    Log3 $hash, 4,"$name:  VBUSIF_Define: VBUSIF_DoInit ";
 	}
-   Log3 $hash, 4,"VBUSIF_DoInit ";
 	return undef;
 }
 
@@ -130,17 +136,21 @@ sub VBUSIF_Read($@)
 	my $idx;
   my $muster = "aa";
 	$idx = index($data,$muster);
-  Log3 $hash, 4,"$name: VBUSIF_Read0: index = $data";
+  Log3 $hash, 4,"$name:  VBUSIF_Read0: Data = $data";
+  
 	if ($idx>=0) {
     $msg2 = $data;
 		$data = substr($data,$idx); # Cut off beginning
   	$idx = index($data,$muster,2); # Find next message
 
 		if ($idx>0) {
+    
+    	$idx +=1 if (substr($data,$idx,3) eq "aaa"); # Message endet mit a
+    
 			$msg = substr($data,0,$idx);
 			$data = substr($data,$idx);
 			my $protoVersion = substr($msg,10,2);
-    	Log3 $hash, 4,"$name: VBUSIF_Read1: protoVersion : $protoVersion";
+    	Log3 $hash, 4,"$name:  VBUSIF_Read1: protoVersion : $protoVersion";
       
   	  if ($protoVersion == "10" && length($msg)>=20) {
 			  	my $frameCount = hex(substr($msg,16,2));
@@ -151,30 +161,26 @@ sub VBUSIF_Read($@)
 			  	}
 				  $crc = ($crc ^ 0xff) & 0x7f;
 				  if ($headerCRC != $crc) {
-	             Log3 $hash, 3, "$name: VBUSIF_Read2: Wrong checksum: $crc != $headerCRC";
+	             Log3 $hash, 3, "$name:  VBUSIF_Read2: Wrong checksum: $crc != $headerCRC";
 				    } else {
 					     my $len = 20+12*$frameCount;
-               Log3 $hash, 4,"$name: VBUSIF_Read2a Len: ".$len." Counter: ".$frameCount;
-      				 if ($len != length($msg)){
+               Log3 $hash, 4,"$name:  VBUSIF_Read2a Len: ".$len." Counter: ".$frameCount;
+      				 
+              # if ($len != length($msg)){
                # Fehler bei aa1000277310000103414a7f1300071c00001401006a62023000016aaa000021732000050000000000000046a
                #                                                                   ^ hier wird falsch getrennt
-                  $msg = substr($msg2,0,$len);
-                   Log3 $hash, 4,"$name: VBUSIF_Read2b MSG: ".$msg;
-               }
+              #    $msg = substr($msg2,0,$len);
+              #    Log3 $hash, 4,"$name: VBUSIF_Read2b MSG: ".$msg;
+              # }
                
                if ($len != length($msg)) {
-			     		 #if ($len != length($msg) && length($msg) != 247) {
-                Log3 $hash, 4,"$name: VBUSIF_Read3: Wrong message length: $len != ".length($msg);
+                 Log3 $hash, 4,"$name:  VBUSIF_Read3: Wrong message length: $len != ".length($msg);
 					      } else {
-                   Log3 $hash, 4,"$name:  VBUSIF_Read4: OK message length: $len : ".length($msg);
-						       if(length($msg) == 247) {
-						     	     $msg = $msg."a";
-                       Log3 $hash, 4,"$name: VBUSIF_Read5: message + a : ".$msg;
-						       }
-						        my $payload = VBUSIF_DecodePayload($hash,$msg);
-						        if (defined $payload) {
+                 Log3 $hash, 4,"$name:  VBUSIF_Read4: OK message length: $len : ".length($msg);
+  				        my $payload = VBUSIF_DecodePayload($hash,$msg);
+	  			        if (defined $payload) {
 							        $msg = substr($msg,0,20).$payload;
-                      Log3 $hash, 4,"$name: VBUSIF_Read6 MSG: ".$msg." Payload: ".$payload;
+                      Log3 $hash, 4,"$name:  VBUSIF_Read6 MSG: ".$msg." Payload: ".$payload;
 							        $hash->{"${name}_MSGCNT"}++;
 							        $hash->{"${name}_TIME"} = TimeNow();
 						        	$hash->{RAWMSG} = $msg;
@@ -191,15 +197,20 @@ sub VBUSIF_Read($@)
 				my $dataPntVal = substr($msg,20,8);
 				my $septet     = substr($msg,28,2);
 				my $checksum   = substr($msg,30,2);
-        Log3 $hash, 4,"$name: VBUSIF_Read7: protoVersion : $protoVersion";
+        
+        Log3 $hash, 4,"$name:  VBUSIF_Read7: Version : $protoVersion CMD: $command ID: $dataPntId Val: $dataPntVal tet: $septet CRC: $checksum ";
 #				TODO use septet
 #				TODO validate checksum
 #				TODO Understand protocol
 
 			}
-      	Log3 $hash, 4,"$name: VBUSIF_Read8: raus ";
+      	Log3 $hash, 4,"$name:  VBUSIF_Read8: raus ";
 		}
-	}
+	} else {
+      Log3 $hash->{NAME}, 3,"$name:  VBUSIF_Read_Ende: $data ";
+      return "";
+  }
+
 
 	$hash->{PARTIAL} = $data;
 #	return $msg if(defined($local));
@@ -234,7 +245,7 @@ sub VBUSIF_DecodePayload($@)
 		}
 
 		if ($crc != $frameCRC) {
-		   Log3 $hash, 4,"$name: VBUSIF_DecodePayload0: Wrong checksum: $crc != $frameCRC";
+		   Log3 $hash, 4,"$name:  VBUSIF_DecodePayload0: Wrong checksum: $crc != $frameCRC";
 			return undef;
 		}
 	}
@@ -244,13 +255,16 @@ sub VBUSIF_DecodePayload($@)
 1;
 
 =pod
+=item device
+=item summary    connects to the RESOL VBUS LAN or Serial Port adapter 
+=item summary_DE verbindet sich mit einem RESOL VBUS LAN oder Seriell Adapter
 =begin html
 
 <a name="VBUSIF"></a>
 <h3>VBUSIF</h3>
 <ul>
   This module connects to the RESOL VBUS LAN or Serial Port adapter.
-  It serves as the "physical" counterpart to the <a href="#VBUSDevice">VBUSDevice</a>
+  It serves as the "physical" counterpart to the <a href="#VBUSDEV">VBUSDevice</a>
   devices.
   <br /><br />
   <a name="VBUSIF_Define"></a>
@@ -261,6 +275,8 @@ sub VBUSIF_DecodePayload($@)
   <br />
   &lt;device&gt; is a &lt;host&gt;:&lt;port&gt; combination, where
   &lt;host&gt; is the address of the RESOL LAN Adapter and &lt;port&gt; 7053.
+  <br />
+  Please note: the password of RESOL Device must be unchanged at &lt;host&gt;
   <br />
   Examples:
   <ul>

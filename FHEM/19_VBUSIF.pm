@@ -1,5 +1,5 @@
 ##############################################
-# $Id: 19_VBUSIF.pm 201710115 2017-01-15 03:54:15Z awk+pejonp $
+# $Id: 19_VBUSIF.pm 20170116 2017-01-16 03:54:15Z awk+pejonp $
 #
 # VBUS LAN Adapter Device
 # 19_VBUSIF.pm

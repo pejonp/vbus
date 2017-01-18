@@ -1,5 +1,5 @@
 ##############################################
-# $Id: 21_VBUSDEV.pm 20170116 2017-01-16 10:10:10Z awk+pejonp $
+# $Id: 21_VBUSDEV.pm 20170118 2017-01-18 10:10:10Z awk+pejonp $
 #
 # 21_VBUSDEV.pm
 # VBUS Client Device

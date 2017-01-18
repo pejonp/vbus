@@ -1148,16 +1148,19 @@ sub VBUSDEV_Parse($$)
    if ($dst_addr == "0020")
   {
    		Log3 $iodev, 4, "VBUSDEV_Parse04: Computer       ioName: ".$ioName. " DST-ADR: " . $dst_addr;
+		 return "";
   }
   
    if ($dst_addr == "0040")
   {
    		Log3 $iodev, 4, "VBUSDEV_Parse05: SD3 / GAx      ioName: ".$ioName. " DST-ADR: " . $dst_addr;
+		 return "";
   }
 
    if ($dst_addr == "0050")
   {
    		Log3 $iodev, 4, "VBUSDEV_Parse06: DL2      ioName: ".$ioName. " DST-ADR: " . $dst_addr;
+		 return "";
   }
 
      if ($dst_addr == "6521")

@@ -32,7 +32,7 @@ Hier die schon hinterlegten Geräte.
 |Code | Geräte|Bemerkung|
 | ------------- | ----------- | ----------- |
 |0050 |  DL_2 | Beipielkonfig DeltaSol_M (0x7311): https://github.com/pejonp/vbus/blob/master/dl2_httpmod_fhem.cfg 
-|     |       | https://forum.fhem.de/index.php/topic,10303.msg347411.html#msg347411
+|     |       | FHEM-Forum: https://forum.fhem.de/index.php/topic,10303.msg347411.html#msg347411
 |0053 |  DL_3 |
 |1060|Vitosolic200_SD4|
 |1065|Vitosolic200_WMZ1|

@@ -1,5 +1,5 @@
 ##############################################
-# $Id: 21_VBUSDEV.pm 20170118 2017-01-18 10:10:10Z awk+pejonp $
+# $Id: 21_VBUSDEV.pm 20170119 2017-01-19 10:10:10Z awk+pejonp $
 #
 # 21_VBUSDEV.pm
 # VBUS Client Device
@@ -618,7 +618,7 @@ my %VBUS_devices = (
 			{ "offset" => 78,"name" => " System_1","bitSize" => 15 },
 			{ "offset" => 80,"name" => " Variant_","bitSize" => 8 },
 			]},
-	"7341" => {"name" => "CitrinSLR_XT", "cmd" => "0100", "fields" => [
+	"7341" => {"name" => "CitrinSLR_XT", "cmd" => "0100", "fields" => [	
 			{ "offset" => 0, "name" => "S1-SF-K", "bitSize" => 15, "factor" => 0.1, "unit" => "°C" },
 			{ "offset" => 2, "name" => "S2-SF-1", "bitSize" => 15, "factor" => 0.1, "unit" => "°C" },
 			{ "offset" => 4, "name" => "S3-SF-2", "bitSize" => 15, "factor" => 0.1, "unit" => "°C" },
@@ -676,7 +676,8 @@ my %VBUS_devices = (
 			{ "offset" => 122, "name" => "Warningmask", "bitSize" => 16,  },
 			{ "offset" => 124, "name" => "Systemflow.Parameteraenderungen", "bitSize" => 16,  },
 			]},
-	"7342" => {"name" => "CitrinSLR_XT1", "cmd" => "0100", "fields" => [
+#	"7342" => {"name" => "CitrinSLR_XT1", "cmd" => "0100", "fields" => [
+	"7442" => {"name" => "CitrinSLR_XT1", "cmd" => "0100", "fields" => [
 			{ "offset" => 0, "name" => "Temperatur_1", "bitSize" => 15, "factor" => 0.1, "unit" => "°C" },
 			{ "offset" => 2, "name" => "Temperatur_2", "bitSize" => 15, "factor" => 0.1, "unit" => "°C" },
 			{ "offset" => 4, "name" => "Temperatur_3", "bitSize" => 15, "factor" => 0.1, "unit" => "°C" },
@@ -1117,7 +1118,7 @@ sub VBUSDEV_Parse($$)
 {
   my ($iodev, $msg, $local) = @_;
 	my $ioName = $iodev->{NAME};
-
+  my $cmd_ok = 0;
 
 	my $dst_addr = substr($msg,4,2).substr($msg,2,2);
 	my $src_addr = substr($msg,8,2).substr($msg,6,2);
@@ -1131,43 +1132,56 @@ sub VBUSDEV_Parse($$)
   if ($dst_addr == "0000")
   {
    	  Log3 $iodev, 4, "VBUSDEV_Parse01: Broadcast ioName: ".$ioName. " DST-ADR: " . $dst_addr;
+      $cmd_ok = 0;
+      return "";
   }
 
   if ($dst_addr == "0010")
   {
    		Log3 $iodev, 4, "VBUSDEV_Parse02: DFA       ioName: ".$ioName. " DST-ADR: " . $dst_addr;
+      $cmd_ok = 1;
   }
   
    if ($dst_addr == "0015")
   {
    		
       Log3 $iodev, 4, "VBUSDEV_Parse03: Standard-Infos ioName: ".$ioName. " DST-ADR: " . $dst_addr;
+      $cmd_ok = 0;
       return "";
   }
   
    if ($dst_addr == "0020")
   {
    		Log3 $iodev, 4, "VBUSDEV_Parse04: Computer       ioName: ".$ioName. " DST-ADR: " . $dst_addr;
-		 return "";
+      $cmd_ok = 0;
+		  return "";
   }
   
    if ($dst_addr == "0040")
   {
    		Log3 $iodev, 4, "VBUSDEV_Parse05: SD3 / GAx      ioName: ".$ioName. " DST-ADR: " . $dst_addr;
-		 return "";
+      $cmd_ok = 0;
+		  return "";
   }
 
    if ($dst_addr == "0050")
   {
    		Log3 $iodev, 4, "VBUSDEV_Parse06: DL2      ioName: ".$ioName. " DST-ADR: " . $dst_addr;
-		 return "";
+      $cmd_ok = 0;
+		  return "";
   }
 
      if ($dst_addr == "6521")
   {
   		Log3 $iodev, 4, "VBUSDEV_Parse07: MSR65    ioName: ".$ioName. " DST-ADR: " . $dst_addr;
+      $cmd_ok = 1;
       $dst_addr = "0010";
       $src_addr = "6521";     
+  }
+  
+  if ($cmd_ok == 0) {
+        # Hier sollen alle anderen Zustände abgefangen und dann abgebrochen werden
+        return "";
   }
   
 	if ( defined $devtype->{dst_addr} ) {

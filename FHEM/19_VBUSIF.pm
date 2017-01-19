@@ -1,5 +1,5 @@
 ##############################################
-# $Id: 19_VBUSIF.pm 20170116 2017-01-16 03:54:15Z awk+pejonp $
+# $Id: 19_VBUSIF.pm 20170119 2017-01-19 03:54:15Z awk+pejonp $
 #
 # VBUS LAN Adapter Device
 # 19_VBUSIF.pm
@@ -270,7 +270,7 @@ sub VBUSIF_DecodePayload($@)
   <a name="VBUSIF_Define"></a>
   <b>Define</b>
   <ul>
-    <code>define &lt;name&gt; VBUS &lt;device&gt;</code>
+    <code>define &lt;name&gt; VBUSIF &lt;device&gt;</code>
   <br />
   <br />
   &lt;device&gt; is a &lt;host&gt;:&lt;port&gt; combination, where

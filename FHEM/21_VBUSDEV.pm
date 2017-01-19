@@ -676,8 +676,7 @@ my %VBUS_devices = (
 			{ "offset" => 122, "name" => "Warningmask", "bitSize" => 16,  },
 			{ "offset" => 124, "name" => "Systemflow.Parameteraenderungen", "bitSize" => 16,  },
 			]},
-#	"7342" => {"name" => "CitrinSLR_XT1", "cmd" => "0100", "fields" => [
-	"7442" => {"name" => "CitrinSLR_XT1", "cmd" => "0100", "fields" => [
+	"7342" => {"name" => "CitrinSLR_XT1", "cmd" => "0100", "fields" => [
 			{ "offset" => 0, "name" => "Temperatur_1", "bitSize" => 15, "factor" => 0.1, "unit" => "°C" },
 			{ "offset" => 2, "name" => "Temperatur_2", "bitSize" => 15, "factor" => 0.1, "unit" => "°C" },
 			{ "offset" => 4, "name" => "Temperatur_3", "bitSize" => 15, "factor" => 0.1, "unit" => "°C" },

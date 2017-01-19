@@ -31,7 +31,7 @@ Hier die schon hinterlegten Geräte.
 
 |Code | Geräte|Bemerkung|
 | ------------- | ----------- | ----------- |
-|0050 |  DL_2 |
+|0050 |  DL_2 | https://forum.fhem.de/index.php/topic,10303.msg347411.html#msg347411
 |0053 |  DL_3 |
 |1060|Vitosolic200_SD4|
 |1065|Vitosolic200_WMZ1|
@@ -45,6 +45,8 @@ Hier die schon hinterlegten Geräte.
 |4010|WMZ|
 |4211|SKSC1/2|
 |4212|DeltaSolC|
+|4213|Sonnenkraft_SKSC1HE|19.01.2017
+|4214|Sonnenkraft_SKSC2HE|19.01.2017
 |4278|DeltaSol_BS4|
 |427B|DeltaSol_BS_2009|
 |5251|Frischwasserregler| 15.01.2017
@@ -100,3 +102,4 @@ In Kombination mit einem ESP8266 sicher eine gute und preiswerte Lösung. Beim f
 Einfache Schaltung für den lesenden Zugriff auf den VBUS: https://groups.google.com/forum/#!topic/resol-vbus/3CjZffK53ig
 
 Quelle: https://forum.fhem.de/index.php/topic,10303.msg472373.html#msg472373
+

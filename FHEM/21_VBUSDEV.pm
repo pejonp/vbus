@@ -1,5 +1,5 @@
 ##############################################
-# $Id: 21_VBUSDEV.pm 20170119 2017-01-19 10:10:10Z awk+pejonp $
+# $Id: 21_VBUSDEV.pm 20170122 2017-01-22 10:10:10Z awk+pejonp $
 #
 # 21_VBUSDEV.pm
 # VBUS Client Device
@@ -238,7 +238,7 @@ my %VBUS_devices = (
 			{ "offset" => 18,"name" => "Waermemenge2","bitSize" => 16,"factor" => 1000,"unit" => "Wh" },
 			{ "offset" => 20,"name" => "Waermemenge3","bitSize" => 16,"factor" => 1000000,"unit" => "Wh" },
 			]},
-	"4212" => {"name" => "DeltaSolC", "cmd" => "0100", "fields" => [ 	
+	 "4212" => {"name" => "DeltaSolC", "cmd" => "0100", "fields" => [ 	
 			{ "offset" =>  0,"name" => "temperature_T01","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
 			{ "offset" =>  2,"name" => "temperature_T02","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
 			{ "offset" =>  4,"name" => "temperature_T03","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
@@ -253,40 +253,6 @@ my %VBUS_devices = (
 			{ "offset" => 18,"name" => "waermemenge_2","bitSize" => 16,"factor" => 1000,"unit" => "Wh" },
 			{ "offset" => 20,"name" => "waermemenge_3","bitSize" => 16,"factor" => 1000000,"unit" => "Wh" },
 			{ "offset" => 22,"name" => "systemtime","bitSize" => 15 },
-			]},
-	"4213" => {"name" => "Sonnenkraft_SKSC1HE", "cmd" => "0100", "dst_addr" => "0010", "fields" => [ 	
-			{ "offset" =>  0,"name" => "Temperatur_Sensor1","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
-			{ "offset" =>  2,"name" => "Temperatur_Sensor2","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
-			{ "offset" =>  4,"name" => "Temperatur_Sensor3","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
-			{ "offset" =>  6,"name" => "Temperatur_Sensor4","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
-			{ "offset" =>  8,"name" => "Drehzahl_Relais_1", "bitSize" =>  8,"factor" => 1  ,"unit" => "%" },
-			{ "offset" =>  9,"name" => "Drehzahl_Relais_2", "bitSize" =>  8,"factor" => 1  ,"unit" => "%" },
-			{ "offset" => 10,"name" => "Fehlermaske",       "bitSize" =>  8,"factor" => 1,  "unit" => "St"  },
-			{ "offset" => 12,"name" => "Betriebsstunden_Pumpe1","bitSize" => 16,"factor" => 1,"unit" => "h"  },
-			{ "offset" => 14,"name" => "Betriebsstunden_Pumpe2","bitSize" => 16,"factor" => 1,"unit" => "h"  },
-			{ "offset" => 16,"name" => "Waermemenge1","bitSize" => 15,"factor" => 1,"unit" => "Wh" },
-			{ "offset" => 18,"name" => "Waermemenge2","bitSize" => 15,"factor" => 1000,"unit" => "Wh" },
-			{ "offset" => 20,"name" => "Waermemenge3","bitSize" => 15,"factor" => 1000000,"unit" => "Wh" },
-			{ "offset" => 24,"name" => "Temperatur_VFD1",   "bitSize" => 15,"factor" => 0,1,"unit" => "°C" },
-			{ "offset" => 26,"name" => "Volumenstrom_VFD1", "bitSize" => 15,"factor" => 1  ,"unit" => "L_h" },
-			{ "offset" => 32,"name" => "Spannung" , "bitSize" => 8,"factor" => 0,1,"unit" => "V" },
-			]},
-	"4214" => {"name" => "Sonnenkraft_SKSC2HE", "cmd" => "0100", "dst_addr" => "0010", "fields" => [ 	
-			{ "offset" =>  0,"name" => "Temperatur_Sensor1","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
-			{ "offset" =>  2,"name" => "Temperatur_Sensor2","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
-			{ "offset" =>  4,"name" => "Temperatur_Sensor3","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
-			{ "offset" =>  6,"name" => "Temperatur_Sensor4","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
-			{ "offset" =>  8,"name" => "Drehzahl_Relais_1", "bitSize" =>  8,"factor" => 1  ,"unit" => "%" },
-			{ "offset" =>  9,"name" => "Drehzahl_Relais_2", "bitSize" =>  8,"factor" => 1  ,"unit" => "%" },
-			{ "offset" => 10,"name" => "Fehlermaske",       "bitSize" =>  8,"factor" => 1,  "unit" => "St"  },
-			{ "offset" => 12,"name" => "Betriebsstunden_Pumpe1","bitSize" => 16,"factor" => 1,"unit" => "h"  },
-			{ "offset" => 14,"name" => "Betriebsstunden_Pumpe2","bitSize" => 16,"factor" => 1,"unit" => "h"  },
-			{ "offset" => 16,"name" => "Waermemenge1","bitSize" => 15,"factor" => 1,"unit" => "Wh" },
-			{ "offset" => 18,"name" => "Waermemenge2","bitSize" => 15,"factor" => 1000,"unit" => "Wh" },
-			{ "offset" => 20,"name" => "Waermemenge3","bitSize" => 15,"factor" => 1000000,"unit" => "Wh" },
-			{ "offset" => 24,"name" => "Temperatur_VFD1",   "bitSize" => 15,"factor" => 0,1,"unit" => "°C" },
-			{ "offset" => 26,"name" => "Volumenstrom_VFD1", "bitSize" => 15,"factor" => 1  ,"unit" => "L_h" },
-			{ "offset" => 32,"name" => "Spannung" , "bitSize" => 8,"factor" => 0,1,"unit" => "V" },
 			]},
 	"4278" => {"name" => "DeltaSol_BS4", "cmd" => "0100", "fields" => [
 			{ "offset" =>  0,"name" => "Kollektortemperatur_T01","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
@@ -1062,7 +1028,7 @@ my %VBUS_devices = (
 			]},
 	"7E31" => {"name" => "DeltaSol_MX_WMZ", "cmd" => "0100", "fields" => [
 			{ "offset" =>  0,"name" => "Waermemenge","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
-#			{ "offset" =>  4,"name" => "Leistung","bitSize" => 31,"factor" => 1,"unit" => "W" },
+			{ "offset" =>  4,"name" => "Leistung","bitSize" => 31,"factor" => 1,"unit" => "W" },
 			{ "offset" =>  8,"name" => "Waermemenge_heute","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
 			{ "offset" =>  12,"name" => "Waermemenge_Woche","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
 			{ "offset" =>  16,"name" => "Gesamtvolumen","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
@@ -1153,8 +1119,8 @@ sub VBUSDEV_Parse($$)
 	my $ioName = $iodev->{NAME};
   my $cmd_ok = 0;
 
-	my $dst_addr = substr($msg,4,2).substr($msg,2,2);
-	my $src_addr = substr($msg,8,2).substr($msg,6,2);
+	my $dst_addr = uc(substr($msg,4,2).substr($msg,2,2));
+	my $src_addr = uc(substr($msg,8,2).substr($msg,6,2));
 	my $protoVersion = substr($msg,10,2);
 
 	my $devtype = $VBUS_devices{$src_addr};
@@ -1238,7 +1204,6 @@ sub VBUSDEV_Parse($$)
 	foreach my $mod (keys %{$modules{VBUSDEV}{defptr}}) {
   	my $hash = $modules{VBUSDEV}{defptr}{"$src_addr"};
 		$attr{$hash->{NAME}}{model} = $devtype->{name};
-    #Log3 $iodev, 3, "VBUSDEV_Parse200 : Command " . $command . " DevTyp: ".$devtype." Model: ".$mod." MSG: " . $payload;
     my $command = substr($msg,14,2).substr($msg,12,2);
 		my $payload = substr($msg,20);
     Log3 $iodev, 4, "VBUSDEV_Parse20 : Command " . $command . " DevTyp: ".$devtype." Model: ".$mod." MSG: " . $payload;
@@ -1247,8 +1212,6 @@ sub VBUSDEV_Parse($$)
 	}
 	return "";
 }
-
-
 
 sub VBUSDEV_ParsePayload($@)
 {
@@ -1261,12 +1224,11 @@ sub VBUSDEV_ParsePayload($@)
   #Log3 $hash, 4, "$name: VBUSDEV_ParsePayLoad1: Command: ".$cmd." Code " . $code . " DevTyp: ".$devname." Name: ".$name ;
   #return undef if ($cmd != $devtype->{cmd});
   #Log3 $hash, 4, "$name: VBUSDEV_ParsePayload2: Dev: $devname CMD: $cmd  PayL: $payload";
-
-
+ 
 	readingsBeginUpdate($hash);
 
 	my $fld = $hash->{READINGS}->{"model"};
-
+ 
 	for my $field (@{$devtype->{fields}}) {
 		my $fieldname = $field->{name};
 		my $val;

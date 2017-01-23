@@ -1,5 +1,5 @@
 ##############################################
-# $Id: 21_VBUSDEV.pm 20170122 2017-01-22 10:10:10Z awk+pejonp $
+# $Id: 21_VBUSDEV.pm 20170123 2017-01-23 10:10:10Z awk+pejonp $
 #
 # 21_VBUSDEV.pm
 # VBUS Client Device
@@ -10,8 +10,6 @@
 # (c) 2016 Tobias Faust <tobias.faust gmx net>
 # (c) 2016 Jörg (pejonp)
 ##############################################  
-
-
 
 package main;
 
@@ -1035,7 +1033,7 @@ my %VBUS_devices = (
 			]},
 );
 
-
+sub VBUSDEV_DbLog_splitFn($);
 sub VBUSDEV_Initialize($)
 {
 	my ($hash) = @_;
@@ -1056,12 +1054,10 @@ sub VBUSDEV_Initialize($)
 	$hash->{AttrList}	= "IODev "
                       ."$readingFnAttributes"
 	                    ." model:"  .join(",", sort @modellist);
+  $hash->{DbLog_splitFn} = "VBUSDEV_DbLog_splitFn";                      
 	$hash->{AutoCreate}	= { "VBUSDEV.*" => { ATTR => "event-min-interval:.*:120 event-on-change-reading:.* verbose:5 ",FILTER => "%NAME"}
 		};
 }
-
-
-
 
 sub VBUSDEV_Define($$)
 {
@@ -1111,6 +1107,26 @@ sub VBUSDEV_Undefine($$)
 	$code = $hash->{IODev}->{NAME} ."-". $code if( defined($hash->{IODev}->{NAME}) );
 	delete($modules{VBUSDEV}{defptr}{$code});
 	return undef;
+}
+
+sub VBUSDEV_DbLog_splitFn($) {
+##################################################################################
+my ($event) = @_;
+    Log3 undef, 4, "in DbLog_splitFn empfangen: $event"; 
+    my ($reading, $value, $unit) = "";
+
+    my @parts = split(/ /,$event);
+    $reading = shift @parts;
+    $reading =~ tr/://d;
+    $value = $parts[0];
+    
+    if($parts[1] =~ /°C/i) 
+    {
+    $unit = "\xB0C";
+    }else{
+    $unit = $parts[1];
+    };  
+return ($reading, $value, $unit);
 }
 
 sub VBUSDEV_Parse($$)

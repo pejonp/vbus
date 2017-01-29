@@ -1,5 +1,5 @@
 ##############################################
-# $Id: 21_VBUSDEV.pm 20170123 2017-01-23 10:10:10Z awk+pejonp $
+# $Id: 21_VBUSDEV.pm 20170129 2017-01-29 10:10:10Z awk+pejonp $
 #
 # 21_VBUSDEV.pm
 # VBUS Client Device
@@ -1120,12 +1120,16 @@ my ($event) = @_;
     $reading =~ tr/://d;
     $value = $parts[0];
     
-    if($parts[1] =~ /°C/i) 
-    {
-    $unit = "\xB0C";
-    }else{
-    $unit = $parts[1];
-    };  
+   if (scalar @parts > 1 ) {
+       if($parts[1] =~ /°C/i) 
+       {
+          $unit = "\xB0C";
+       }else{
+          $unit = $parts[1];
+        }  
+    } else {
+      $unit = "";
+    };
 return ($reading, $value, $unit);
 }
 

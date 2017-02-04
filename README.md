@@ -48,6 +48,7 @@ Hier die schon hinterlegten Geräte.
 |4212|DeltaSolC|
 |4213|Sonnenkraft_SKSC1HE|19.01.2017
 |4214|Sonnenkraft_SKSC2HE|19.01.2017
+|4221|DeltaSol_BS_Plus|04.02.2017
 |4278|DeltaSol_BS4|
 |427B|DeltaSol_BS_2009|
 |5251|Frischwasserregler| 15.01.2017

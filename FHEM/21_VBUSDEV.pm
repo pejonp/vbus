@@ -1,5 +1,5 @@
 ##############################################
-# $Id: 21_VBUSDEV.pm 20170129 2017-01-29 10:10:10Z awk+pejonp $
+# $Id: 21_VBUSDEV.pm 20170204 2017-02-04 10:10:10Z awk+pejonp $
 #
 # 21_VBUSDEV.pm
 # VBUS Client Device
@@ -7,7 +7,7 @@
 # (c) 2014 Arno Willig <akw@bytefeed.de>
 # (c) 2015 Frank Wurdinger <frank@wurdinger.de>
 # (c) 2015 Adrian Freihofer <adrian.freihofer gmail com>
-# (c) 2016 Tobias Faust <tobias.faust gmx net>
+# (c) 2016 Tobias Faust <tobias.faust gmx net>	
 # (c) 2016 Jörg (pejonp)
 ##############################################  
 
@@ -252,6 +252,30 @@ my %VBUS_devices = (
 			{ "offset" => 20,"name" => "waermemenge_3","bitSize" => 16,"factor" => 1000000,"unit" => "Wh" },
 			{ "offset" => 22,"name" => "systemtime","bitSize" => 15 },
 			]},
+   "4221" => {"name" => "DeltaSol_BS_Plus", "cmd" => "0100", "fields" => [
+			{ "offset" =>  0,"name" => "Temperatur_Sensor1","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  2,"name" => "Temperatur_Sensor2","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  4,"name" => "Temperatur_Sensor3","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  6,"name" => "Temperatur_Sensor4","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  8,"name" => "Drehzahl_Pumpe1","bitSize" => 8,"unit" => "%" },
+			{ "offset" =>  9,"name" => "Drehzahl_Pumpe2","bitSize" => 8,"unit" => "%" },
+			{ "offset" => 10,"name" => "Relaismaske","bitSize" => 8 },
+      { "offset" => 11,"name" => "Fehlermaske","bitSize" => 8 },
+			{ "offset" => 12,"name" => "Systemzeit","bitSize" => 15 },
+			{ "offset" => 14,"name" => "Schema","bitSize" => 8 },
+      { "offset" => 15, "name" => "Option:_Kollektor_Max", "bitSize" => 1, "bitPos" => 0 },
+			{ "offset" => 15, "name" => "Option:_Kollektor_Min", "bitSize" => 1, "bitPos" => 1 },
+			{ "offset" => 15, "name" => "Option:_Kollektor_Frost", "bitSize" => 1, "bitPos" => 2 },
+			{ "offset" => 15, "name" => "Option:_Röhrenkollektor", "bitSize" => 1, "bitPos" => 3 },
+			{ "offset" => 15, "name" => "Option:_Rückkühlung", "bitSize" => 1, "bitPos" => 4 },
+			{ "offset" => 15, "name" => "Option:_WMZ", "bitSize" => 1, "bitPos" => 5 },
+			{ "offset" => 16, "name" => "Betriebsstunden_Relais_1", "bitSize" => 16 },
+			{ "offset" => 18, "name" => "Betriebsstunden_Relais_2", "bitSize" => 16 },
+      { "offset" => 20, "name" => "Wärmemenge_1","bitSize" => 16,"factor" => 1,"unit" => "Wh" },
+			{ "offset" => 22, "name" => "Wärmemenge_2","bitSize" => 16,"factor" => 1000,"unit" => "Wh" },
+			{ "offset" => 24, "name" => "Wärmemenge_3","bitSize" => 16,"factor" => 1000000,"unit" => "Wh" },
+	    { "offset" => 26, "name" => "Version", "bitSize" => 16, "factor" => 0.01 },			
+			]},   
 	"4278" => {"name" => "DeltaSol_BS4", "cmd" => "0100", "fields" => [
 			{ "offset" =>  0,"name" => "Kollektortemperatur_T01","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
 			{ "offset" =>  2,"name" => "SpeichertemperaturUnten_T02","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },

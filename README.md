@@ -34,6 +34,8 @@ Hier die schon hinterlegten Geräte.
 |0050 |  DL_2 | Beipielkonfig DeltaSol_M (0x7311): https://github.com/pejonp/vbus/blob/master/dl2_httpmod_fhem.cfg 
 |     |       | FHEM-Forum: https://forum.fhem.de/index.php/topic,10303.msg347411.html#msg347411
 |0053 |  DL_3 |
+|1001|DeltaSol_SLT| 11.02.2017
+|1011|DeltaSol_SLT_WMZ| 11.02.2017
 |1060|Vitosolic200_SD4|
 |1065|Vitosolic200_WMZ1|
 |1066|Vitosolic200_WMZ2|
@@ -57,39 +59,39 @@ Hier die schon hinterlegten Geräte.
 |5411|DeltaThermHC_HK1| 12.11.2016
 |5412|DeltaThermHC_HK2| 12.11.2016
 |5420|DeltaThermHC_WMZ| 23.08.2016
-|5611| DeltaTherm_FK|
-|6521| MSR65_1|
-|7821| MSR65_1|
-|6522| MSR65_2|
-|7160| SKS3HE|
-|7161| SKSC3HE_[HK1]|
-|7162| SKSC3HE_[HK2]|
-|7311| DeltaSol_M|
-|7312| DeltaSol_M_HKM|
-|7315| DeltaSol_M_Volumen|
-|7316| DeltaSol_M_WMZ1|
-|7317| DeltaSol_M_WMZ2|
-|7321| Vitosolic200|       => funktioniert (selber im Einsatz)
-|7326| Vitosolic200_WMZ1|  => funktioniert (selber im Einsatz)
-|7327| Vitosolic200_WMZ2|  => funktioniert (selber im Einsatz)
-|7331| SLR|
-|7341| CitrinSLR_XT|
-|7342| SLR XT-Erweiterungsmodul 1| 15.01.2017
-|7343| SLR XT-Erweiterungsmodul 2| 15.01.2017
-|7344| SLR XT-Erweiterungsmodul 3| 15.01.2017
-|7345| SLR XT-Erweiterungsmodul 4| 15.01.2017
-|7346| SLR XT-Erweiterungsmodul 5| 15.01.2017
-|7411| DeltaSol_ES|
-|7421| DeltaSol_BX|
-|7721| DeltaSolE_Regler|
-|7722| DeltaSolE_WMZ|
-|7751| DiemasolC|
-|7821| Cosmo_Multi_Regler|
-|7822| Cosmo_Multi_WMZ|
-|7E11| DeltaSol_MX_Regler|
-|7E12| DeltaSol_MX_Module|
-|7E21| DeltaSol_MX_Heizkreis|
-|7E31| DeltaSol_MX_WMZ|
+|5611|DeltaTherm_FK|
+|6521|MSR65_1|
+|7821|MSR65_1|
+|6522|MSR65_2|
+|7160|SKS3HE|
+|7161|SKSC3HE_[HK1]|
+|7162|SKSC3HE_[HK2]|
+|7311|DeltaSol_M|
+|7312|DeltaSol_M_HKM|
+|7315|DeltaSol_M_Volumen|
+|7316|DeltaSol_M_WMZ1|
+|7317|DeltaSol_M_WMZ2|
+|7321|Vitosolic200|  => funktioniert (selber im Einsatz)
+|7326|Vitosolic200_WMZ1|  => funktioniert (selber im Einsatz)
+|7327|Vitosolic200_WMZ2|  => funktioniert (selber im Einsatz)
+|7331|SLR|
+|7341|CitrinSLR_XT|
+|7342|SLR XT-Erweiterungsmodul1| 15.01.2017
+|7343|SLR XT-Erweiterungsmodul2| 15.01.2017
+|7344|SLR XT-Erweiterungsmodul3| 15.01.2017
+|7345|SLR XT-Erweiterungsmodul4| 15.01.2017
+|7346|SLR XT-Erweiterungsmodul5| 15.01.2017
+|7411|DeltaSol_ES|
+|7421|DeltaSol_BX|
+|7721|DeltaSolE_Regler|
+|7722|DeltaSolE_WMZ|
+|7751|DiemasolC|
+|7821|Cosmo_Multi_Regler|
+|7822|Cosmo_Multi_WMZ|
+|7E11|DeltaSol_MX_Regler|
+|7E12|DeltaSol_MX_Module|
+|7E21|DeltaSol_MX_Heizkreis|
+|7E31|DeltaSol_MX_WMZ|
 
 
 VBUS-Decoder

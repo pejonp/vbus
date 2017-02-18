@@ -55,10 +55,13 @@ Hier die schon hinterlegten Geräte.
 |427B|DeltaSol_BS_2009|
 |5251|Frischwasserregler| 15.01.2017
 |5400|DeltaThermHC_Regler| 23.08.2016
-|5410|DeltaThermHC_HK| 23.08.2016
+|5410|DeltaThermHC_HK0| 23.08.2016
 |5411|DeltaThermHC_HK1| 12.11.2016
 |5412|DeltaThermHC_HK2| 12.11.2016
-|5420|DeltaThermHC_WMZ| 23.08.2016
+|5420|DeltaThermHC_WMZ0| 23.08.2016
+|5421|DeltaThermHC_WMZ1| 18.02.2017
+|5430|DeltaThermHC_MODUL0| 18.02.2017
+|5431|DeltaThermHC_MODUL1| 18.02.2017
 |5611|DeltaTherm_FK|
 |6521|MSR65_1|
 |7821|MSR65_1|

@@ -43,6 +43,9 @@ Hier die schon hinterlegten Geräte.
 |1140|DeltaThermHC_mini_HK| 23.08.2016
 |2211|DeltaSol_CS_Plus| 03.10.2016
 |2251|DeltaSol_SL|
+|2252|DeltaSol_SL_WMZ1| 21.02.2017
+|2261|HRSolar_BASIC| 21.02.2017
+|2262|HRSolar_BASIC_WMZ1| 21.02.2017
 |2271|DeltaSol_SLL|09.11.2016 (https://forum.fhem.de/index.php/topic,10303.msg518538.html#msg518538)
 |2272|DeltaSol_SLL_WMZ1|09.11.2016 (michaelfhem)
 |4010|WMZ|

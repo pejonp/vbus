@@ -1,3 +1,5 @@
+26.02.2017
+VBUSIF:  set vbus password YourPassword eingebaut, PW nicht mehr in Klartext in 19_VBUSIF.pm
 23.01.2017
 Funktion "VBUSDEV_DbLog_splitFn" eingebaut
 19.01.2017

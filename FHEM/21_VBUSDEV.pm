@@ -1,5 +1,5 @@
 ##############################################
-# $Id: 21_VBUSDEV.pm 20170221 2017-02-21 10:10:10Z awk+pejonp $
+# $Id: 21_VBUSDEV.pm 20170226 2017-02-26 10:10:10Z awk+pejonp $
 #
 # 21_VBUSDEV.pm
 # VBUS Client Device
@@ -598,6 +598,49 @@ my %VBUS_devices = (
 			{ "offset" => 2, "name" => "7162_Mischerlaufzeit", "bitSize" => 8, "factor" => 1, "unit" => "s" },
 			{ "offset" => 3, "name" => "7162_Mischerpausenzeit", "bitSize" => 8, "factor" => 1, "unit" => "s" },
 			{ "offset" => 4, "name" => "7162_HK-Status", "bitSize" => 16, "factor" => 1, "unit" => "" },
+			]},
+	"7210" => {"name" => "SKSR_1_2_3", "cmd" => "0100", "fields" => [
+			{ "offset" =>  0,"name" => "TemperaturSensor_1","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  2,"name" => "TemperaturSensor_2","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  4,"name" => "TemperaturSensor_3","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  6,"name" => "TemperaturSensor_4","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  8,"name" => "TemperaturSensor_5","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" => 10,"name" => "TemperaturSensor_6","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" => 12,"name" => "TemperaturSensor_7","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" => 14,"name" => "TemperaturSensor_8","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" => 16,"name" => "Einstrahlung","bitSize" => 15,"factor" => 1,"unit" => "W/qm" },
+			{ "offset" => 18,"name" => "Volumenstrom","bitSize" => 15,"factor" => 1,"unit" => "l/h" },
+			{ "offset" => 20,"name" => "Drehzahl_A1","bitSize" => 8,"factor" => 1,"unit" => "%" },
+			{ "offset" => 21,"name" => "Drehzahl_A2","bitSize" => 8,"factor" => 1,"unit" => "%"},
+			{ "offset" => 22,"name" => "Drehzahl_A3", "bitSize" => 8, "unit" => "%"},
+			{ "offset" => 23,"name" => "Drehzahl_A", "bitSize" => 8, "unit" => "%"},
+			{ "offset" => 24,"name" => "Waerme1","bitSize" => 15,"factor" => 1,"unit" => "Wh" },
+			{ "offset" => 26,"name" => "Waerme2","bitSize" => 15,"unit" => "kWh" },
+			{ "offset" => 28,"name" => "Waerme3","bitSize" => 15,"unit" => "MWh" },
+			{ "offset" => 30,"name" => "Waerme4","bitSize" => 15,"unit" => "GWh" },
+			{ "offset" => 32,"name" => "Fehlermaske", "bitSize" => 8, "factor" => 1 },
+			{ "offset" => 33,"name" => "Sensorbruchnummer", "bitSize" => 8, "factor" => 1 },
+			{ "offset" => 34,"name" => "Sensorkurzschlussnummer", "bitSize" => 8, "factor" => 1 },   
+			{ "offset" => 42,"name" => "Systemzeit", "bitSize" => 15, "factor" => 1, },
+			{ "offset" => 42,"name" => "Systemzeit2", "bitSize" => 15, "factor" => 1, "timeRef" => 1 },
+			]},
+	"7211" => {"name" => "SKSC3_[HK1]", "cmd" => "0100", "fields" => [
+			{ "offset" => 0,"name" => "7161_HK1_Vorlaufsolltemperatur", "bitSize" => 15, "factor" => 0.1, "unit" => "°C" },
+			{ "offset" => 2,"name" => "7161_Mischerlaufzeit", "bitSize" => 8, "factor" => 1, "unit" => "s" },
+			{ "offset" => 3,"name" => "7161_Mischerpausenzeit", "bitSize" => 8, "factor" => 1, "unit" => "s" },
+			{ "offset" => 4,"name" => "7161_HK-Status", "bitSize" => 16, "factor" => 1, "unit" => "" },
+			]},
+	"7212" => {"name" => "SKSC3_[HK2]", "cmd" => "0100", "fields" => [
+			{ "offset" => 0,"name" => "7161_HK1_Vorlaufsolltemperatur", "bitSize" => 15, "factor" => 0.1, "unit" => "°C" },
+			{ "offset" => 2,"name" => "7161_Mischerlaufzeit", "bitSize" => 8, "factor" => 1, "unit" => "s" },
+			{ "offset" => 3,"name" => "7161_Mischerpausenzeit", "bitSize" => 8, "factor" => 1, "unit" => "s" },
+			{ "offset" => 4,"name" => "7161_HK-Status", "bitSize" => 16, "factor" => 1, "unit" => "" },
+			]},
+	"7213" => {"name" => "SKSC3_[HK3]", "cmd" => "0100", "fields" => [
+			{ "offset" => 0,"name" => "7161_HK1_Vorlaufsolltemperatur", "bitSize" => 15, "factor" => 0.1, "unit" => "°C" },
+			{ "offset" => 2,"name" => "7161_Mischerlaufzeit", "bitSize" => 8, "factor" => 1, "unit" => "s" },
+			{ "offset" => 3,"name" => "7161_Mischerpausenzeit", "bitSize" => 8, "factor" => 1, "unit" => "s" },
+			{ "offset" => 4,"name" => "7161_HK-Status", "bitSize" => 16, "factor" => 1, "unit" => "" },
 			]},
 	"7311" => {"name" => "DeltaSol_M", "cmd" => "0100", "fields" => [
 			{ "offset" => 0,"name" => "Temperatur_01","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },

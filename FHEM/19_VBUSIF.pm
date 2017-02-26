@@ -1,5 +1,5 @@
 ##############################################
-# $Id: 19_VBUSIF.pm 20170119 2017-01-19 03:54:15Z awk+pejonp $
+# $Id: 19_VBUSIF.pm 20170226 2017-02-26 10:10:10Z awk+pejonp $
 #
 # VBUS LAN Adapter Device
 # 19_VBUSIF.pm
@@ -26,6 +26,8 @@ sub VBUSIF_Ready($);
 sub VBUSIF_getDevList($$);
 
 
+our $VBUS_pwd;
+
 sub VBUSIF_Initialize($)
 {
 	my ($hash) = @_;
@@ -37,7 +39,7 @@ sub VBUSIF_Initialize($)
 	$hash->{ReadyFn}    = "VBUSIF_Ready";
 	$hash->{UndefFn}    = "VBUSIF_Undef";
 	$hash->{ShutdownFn} = "VBUSIF_Undef";
-
+  $hash->{SetFn}      = "VBUSIF_Set";
 # Normal devices
 	$hash->{DefFn}      = "VBUSIF_Define";
 	$hash->{AttrList}   = "dummy:1,0"
@@ -83,19 +85,24 @@ sub VBUSIF_Define($$)
 	my $ret = DevIo_OpenDev($hash, 0, "VBUSIF_DoInit");
 	return $ret;
 }
-
 ###############################
 sub VBUSIF_DoInit($)
 {
 	my $hash = shift;
 	if ($hash->{DeviceType} eq "Net" ) {
 		my $name = $hash->{NAME};
-		delete $hash->{HANDLE}; # else reregister fails / RELEASE is deadly
+    my $pwd = VBUSIF_readPassword($hash);
+    
+    unless (defined $pwd) {
+      Log3 $hash, 2, "Error: No password set. Please define it (once) with 'set $name password YourPassword'";
+      return undef;
+   }
 
+		delete $hash->{HANDLE}; # else reregister fails / RELEASE is deadly
 		my $conn = $hash->{TCPDev};
 		$conn->autoflush(1);
 		$conn->getline();
-		$conn->write("PASS vbus\n");
+		$conn->write("PASS ".$pwd."\n");
 		$conn->getline();
 		$conn->write("DATA\n");
 		$conn->getline();
@@ -119,7 +126,6 @@ sub VBUSIF_Write($$$)
 	my ($hash,$fn,$msg) = @_;
 	DevIo_SimpleWrite($hash, $msg, 1);
 }
-
 
 sub VBUSIF_Read($@)
 {
@@ -252,6 +258,95 @@ sub VBUSIF_DecodePayload($@)
 	return unpack('H*', $payload);
 }
 
+
+sub VBUSIF_Set($$@) 
+{
+   my ($hash, $name, $cmd, @val) = @_;
+   my $resultStr = "";
+   my $list = "password";
+            
+   if ( lc $cmd eq 'password') {
+      if (int @val == 1) 
+      {
+         return VBUSIF_storePassword ( $hash, $val[0] );
+      }
+ }
+    return "Unknown argument $cmd or wrong parameter(s), choose one of $list"; 
+}     # end VBUSIF_Set
+
+#####################################
+# checks and stores VBUS password used for telnet connection
+sub VBUSIF_storePassword($$)
+{
+    my ($hash, $password) = @_;
+     
+    my $index = $hash->{TYPE}."_".$hash->{NAME}."_passwd";
+    my $key = getUniqueId().$index;
+    
+    my $enc_pwd = "";
+    
+    if(eval "use Digest::MD5;1")
+    {
+        $key = Digest::MD5::md5_hex(unpack "H*", $key);
+        $key .= Digest::MD5::md5_hex($key);
+    }
+    
+    for my $char (split //, $password)
+    {
+        my $encode=chop($key);
+        $enc_pwd.=sprintf("%.2x",ord($char)^ord($encode));
+        $key=$encode.$key;
+    }
+    
+    my $err = setKeyValue($index, $enc_pwd);
+    return "error while saving the password - $err" if(defined($err));
+    
+    return "password successfully saved";
+} # end VBUSIF_storePassword
+#####################################
+#####################################
+# reads the VBUS password
+sub VBUSIF_readPassword($)
+{
+   my ($hash) = @_;
+   my $name = $hash->{NAME};
+
+   my $index = $hash->{TYPE}."_".$hash->{NAME}."_passwd";
+   my $key = getUniqueId().$index;
+
+   my ($password, $err);
+
+   Log3 $hash, 5, "Read VBUS password from file";
+   ($err, $password) = getKeyValue($index);
+
+   if ( defined($err) ) {
+      Log3 $hash, 4, "unable to read VBUS password from file: $err";
+      return undef;
+   }  
+    
+   if ( defined($password) ) {
+      if ( eval "use Digest::MD5;1" ) {
+         $key = Digest::MD5::md5_hex(unpack "H*", $key);
+         $key .= Digest::MD5::md5_hex($key);
+      }
+
+      my $dec_pwd = '';
+     
+      for my $char (map { pack('C', hex($_)) } ($password =~ /(..)/g)) {
+         my $decode=chop($key);
+         $dec_pwd.=chr(ord($char)^ord($decode));
+         $key=$decode.$key;
+      }
+     
+      return $dec_pwd;
+   }
+   else {
+      Log3 $hash, 4, "No password in file";
+      return undef;
+   }
+} # end VBUS_readPassword
+
+
 1;
 
 =pod
@@ -276,7 +371,7 @@ sub VBUSIF_DecodePayload($@)
   &lt;device&gt; is a &lt;host&gt;:&lt;port&gt; combination, where
   &lt;host&gt; is the address of the RESOL LAN Adapter and &lt;port&gt; 7053.
   <br />
-  Please note: the password of RESOL Device must be unchanged at &lt;host&gt;
+  Please note: the password of RESOL Device must be define with 'set &lt;name&gt; password YourPassword'
   <br />
   Examples:
   <ul>

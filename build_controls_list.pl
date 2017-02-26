@@ -61,10 +61,10 @@ sub listfiles2{
 					  my $date = POSIX::strftime("%Y-%d-%m", localtime( $fi->{mtime} ));
 	          my $time = POSIX::strftime("%H:%M:%S", localtime( $fi->{mtime} ));
 						my @line_parts = split (" ",$modifiy_line);
-						@line_parts[2] = fileparse($file,"");
-						@line_parts[3] = $fi->{size};
-						@line_parts[4] = $date;
-						@line_parts[5] = $time;
+						$line_parts[2] = fileparse($file,"");
+						$line_parts[3] = $fi->{size};
+						$line_parts[4] = $date;
+						$line_parts[5] = $time;
 							
 						$modifiy_line = join(" ",@line_parts)."\n";				
 						print (" to $modifiy_line\n");
@@ -88,8 +88,6 @@ sub listfiles2{
                 push @lines, sprintf("UPD %s %-7s %s\n", $date_time, $fi->{size}, $fi->{path});
             }
         }
-        push @lines, "DEL FHEM/21_VBUSDEV.pm\n";
-       
         
         open(my $fh, '>:raw', 'controls_vbus.txt');
         

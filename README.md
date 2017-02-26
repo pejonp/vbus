@@ -72,6 +72,10 @@ Hier die schon hinterlegten Geräte.
 |7160|SKS3HE|
 |7161|SKSC3HE_[HK1]|
 |7162|SKSC3HE_[HK2]|
+|7210|Sonnenkraft_SKSR1/2/3|26.2.2017
+|7211|Sonnenkraft_SKSC3_[HK1]|26.2.2017
+|7212|Sonnenkraft_SKSC3_[HK2]|26.2.2017
+|7213|Sonnenkraft_SKSC3_[HK3]|26.2.2017
 |7311|DeltaSol_M|
 |7312|DeltaSol_M_HKM|
 |7315|DeltaSol_M_Volumen|

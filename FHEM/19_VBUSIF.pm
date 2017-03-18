@@ -361,18 +361,20 @@ sub VBUSIF_readPassword($)
   This module connects to the RESOL VBUS LAN or Serial Port adapter.
   It serves as the "physical" counterpart to the <a href="#VBUSDEV">VBUSDevice</a>
   devices.
-  <br /><br />
+  <br>
+  It uses the perl modul Digest::MD5. 
+  <br/>
   <a name="VBUSIF_Define"></a>
   <b>Define</b>
   <ul>
     <code>define &lt;name&gt; VBUSIF &lt;device&gt;</code>
-  <br />
-  <br />
+  <br/>
+  <br/>
   &lt;device&gt; is a &lt;host&gt;:&lt;port&gt; combination, where
   &lt;host&gt; is the address of the RESOL LAN Adapter and &lt;port&gt; 7053.
-  <br />
+  <br/>
   Please note: the password of RESOL Device must be define with 'set &lt;name&gt; password YourPassword'
-  <br />
+  <br/>
   Examples:
   <ul>
     <code>define vbus VBUSIF 192.168.1.69:7053</code>
@@ -381,7 +383,7 @@ sub VBUSIF_readPassword($)
     <code>define vbus VBUSIF  /dev/ttyS0</code>
   </ul>
   </ul>
-  <br />
+  <br/>
 </ul>
 
 =end html

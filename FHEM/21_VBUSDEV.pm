@@ -1,5 +1,5 @@
 ##############################################
-# $Id: 21_VBUSDEV.pm 20170226 2017-02-26 10:10:10Z awk+pejonp $
+# $Id: 21_VBUSDEV.pm 20170317 2017-03-17 10:10:10Z awk+pejonp $
 #
 # 21_VBUSDEV.pm
 # VBUS Client Device
@@ -156,6 +156,24 @@ my %VBUS_devices = (
 			{ "offset" =>  6,"name" => "WMZ1_heatquantity1","bitSize" => 16,"factor" => 1,"unit" => "Wh" },
 			{ "offset" =>  8,"name" => "WMZ1_heatquantity2","bitSize" => 16,"unit" => "kWh" },
 			{ "offset" =>  10,"name" => "WMZ1_heatquantity3","bitSize" => 16,"unit" => "MWh" },
+			]},
+	"1121" => {"name" => "DeltaSol_CS2", "cmd" => "0100", "fields" => [
+			{ "offset" => 0,"name" => "Temperatur_01","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" => 2,"name" => "Temperatur_02","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" => 4,"name" => "Temperatur_03","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" => 6,"name" => "Temperatur_04","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" => 8,"name" => "Temperatur_05","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" => 10,"name" => "Volumenstrom", "bitSize" => 31, "factor" => 1, "unit" => "1/min" },
+			{ "offset" => 12,"name" => "Drehzahl_Relais", "bitSize" => 7, "factor" => 1, "unit" => "%" },
+			{ "offset" => 14,"name" => "Betriebsstunden_Relais", "bitSize" => 15, "factor" => 1, "unit" => "h" },
+			{ "offset" => 16,"name" => "UnitType","bitSize" => 8 },
+			{ "offset" => 18,"name" => "ErrorMask", "bitSize" => 16 },
+			{ "offset" => 20,"name" => "Statusmask", "bitSize" => 32 },
+			{ "offset" => 24,"name" => "Waermemenge","bitSize" => 32,"factor" => 1,"unit" => "Wh" },
+		#	{ "offset" => 25,"name" => "Waermemenge2","bitSize" => 8,"factor" => 100,"unit" => "Wh" },
+		#	{ "offset" => 26,"name" => "Waermemenge3","bitSize" => 8,"factor" => 10000,"unit" => "Wh" },
+		#	{ "offset" => 27,"name" => "Waermemenge4","bitSize" => 8,"factor" => 10000000,"unit" => "Wh" },
+			{ "offset" => 28,"name" => "SW-Version","bitSize" => 16,"factor" => 0.01 },
 			]},
 	"1140" => {"name" => "DeltaThermHC_mini_HK", "cmd" => "0100", "fields" => [ 	
 			{ "offset" =>  0,"name" => "HK_VorlaufSoll","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },

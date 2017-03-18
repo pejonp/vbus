@@ -40,6 +40,7 @@ Hier die schon hinterlegten Geräte.
 |1065|Vitosolic200_WMZ1|
 |1066|Vitosolic200_WMZ2|
 |1059|DeltaThermHC_mini_Regler| 23.08.2016
+|1121|DeltaSol_CS2| 18.03.2017
 |1140|DeltaThermHC_mini_HK| 23.08.2016
 |2211|DeltaSol_CS_Plus| 03.10.2016
 |2251|DeltaSol_SL|

@@ -70,6 +70,10 @@ Hier die schon hinterlegten Geräte.
 |6521|MSR65_1|
 |7821|MSR65_1|
 |6522|MSR65_2|
+|7112|DeltaSol_BX_Plus_Regler| 03.04.2017
+|7113|DeltaSol_BX_Plus_Module| 03.04.2017
+|7121|DeltaSol_BX_Plus_Heizkreis| 03.04.2017
+|7131|DeltaSol_BX_Plus_WMZ| 03.04.2017
 |7160|SKS3HE|
 |7161|SKSC3HE_[HK1]|
 |7162|SKSC3HE_[HK2]|
@@ -102,7 +106,7 @@ Hier die schon hinterlegten Geräte.
 |7E11|DeltaSol_MX_Regler|
 |7E12|DeltaSol_MX_Module|
 |7E21|DeltaSol_MX_Heizkreis|
-|7E31|DeltaSol_MX_WMZ|
+|7E31|DeltaSol_MX_WMZ| angepaßt 03.04.2017
 
 
 VBUS-Decoder

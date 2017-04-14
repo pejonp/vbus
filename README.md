@@ -43,6 +43,8 @@ Hier die schon hinterlegten Geräte.
 |1121|DeltaSol_CS2| 18.03.2017
 |1140|DeltaThermHC_mini_HK| 23.08.2016
 |2211|DeltaSol_CS_Plus| 03.10.2016
+|2231|Oranier_HK_Regler| 14.04.2017
+|2232|Oranier_HK_WMZ1| 14.04.2017
 |2251|DeltaSol_SL|
 |2252|DeltaSol_SL_WMZ1| 21.02.2017
 |2261|HRSolar_BASIC| 21.02.2017

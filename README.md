@@ -124,4 +124,5 @@ Einfache Schaltung für den lesenden Zugriff auf den VBUS: https://groups.google
 
 Quelle: https://forum.fhem.de/index.php/topic,10303.msg472373.html#msg472373
 
-Set Password  https://github.com/pejonp/vbus/blob/master/set%20Passwd%20VBUS.JPG
+Im VBUS LAN Adapter Device wird das Password für den RESOL Lan-Adapter hinterlegt.
+https://github.com/pejonp/vbus/blob/master/set%20Passwd%20VBUS.JPG

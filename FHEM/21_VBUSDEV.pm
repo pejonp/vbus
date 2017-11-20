@@ -1,5 +1,5 @@
 ##############################################
-# $Id: 21_VBUSDEV.pm 20170403 2017-04-03 10:10:10Z awk+pejonp $
+# $Id: 21_VBUSDEV.pm 20171120 2017-11-20 10:10:10Z awk+pejonp $
 #
 # 21_VBUSDEV.pm
 # VBUS Client Device
@@ -8,7 +8,7 @@
 # (c) 2015 Frank Wurdinger <frank@wurdinger.de>
 # (c) 2015 Adrian Freihofer <adrian.freihofer gmail com>
 # (c) 2016 Tobias Faust <tobias.faust gmx net>	
-# (c) 2016 Jörg (pejonp)
+# (c) 2016 - 2017 Jörg (pejonp)
 ##############################################  
 
 package main;
@@ -1154,6 +1154,24 @@ my %VBUS_devices = (
 			{ "offset" =>  8,"name" => "heatquantity2","bitSize" => 16,"unit" => "kWh" },
 			{ "offset" =>  10,"name" => "heatquantity3","bitSize" => 16,"unit" => "MWh" },
 			]},
+  "7731" => {"name" => "DeltaSol S2/S3", "cmd" => "0100", "fields" => [ 	
+			{ "offset" =>  0,"name" => "Temperatur_Sensor_1","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  2,"name" => "Temperatur_Sensor_2","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  4,"name" => "Temperatur_Sensor_3","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  6,"name" => "Temperatur_Sensor_4","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  8,"name" => "Temperatur_Sensor_5","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" => 10,"name" => "Temperatur_Sensor_6","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" => 12,"name" => "Temperatur_Sensor_7","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" => 14,"name" => "Temperatur_Sensor_8","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+      { "offset" => 16, "name" => "Drehzahl_Relais_1", "bitSize" => 7, "unit" => "%" },
+			{ "offset" => 17, "name" => "Drehzahl_Relais_2", "bitSize" => 7, "unit" => "%" },
+			{ "offset" => 18, "name" => "Drehzahl_Relais_3", "bitSize" => 7, "unit" => "%" },
+      { "offset" => 19, "name" => "Relaisbyte", "bitSize" => 8 },
+			{ "offset" => 20,"name" => "Waermemenge1","bitSize" => 16,"factor" => 1,"unit" => "Wh" },
+			{ "offset" => 22,"name" => "Waermemenge2","bitSize" => 16,"factor" => 1000,"unit" => "Wh" },
+			{ "offset" => 24,"name" => "Waermemenge3","bitSize" => 16,"factor" => 1000000,"unit" => "Wh" },
+			{ "offset" => 26,"name" => "Schema","bitSize" => 8 },
+			]},    
 	"7751" => {"name" => "DiemasolC", "cmd" => "0100", "fields" => [
 			{ "offset" =>  0,"name" => "temperature_T01","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
 			{ "offset" =>  2,"name" => "temperature_T02","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },

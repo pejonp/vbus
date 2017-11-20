@@ -102,6 +102,7 @@ Hier die schon hinterlegten Geräte.
 |7421|DeltaSol_BX|
 |7721|DeltaSolE_Regler|
 |7722|DeltaSolE_WMZ|
+|7731|DeltaSol S2/S3|20.11.2017
 |7751|DiemasolC|
 |7821|Cosmo_Multi_Regler|
 |7822|Cosmo_Multi_WMZ|

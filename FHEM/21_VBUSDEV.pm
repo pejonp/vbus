@@ -1,5 +1,5 @@
 ##############################################
-# $Id: 21_VBUSDEV.pm 20171120 2017-11-20 10:10:10Z awk+pejonp $
+# $Id: 21_VBUSDEV.pm 20171214 2017-12-14 10:10:10Z awk+pejonp $
 #
 # 21_VBUSDEV.pm
 # VBUS Client Device
@@ -164,6 +164,29 @@ my %VBUS_devices = (
 			{ "offset" =>  6,"name" => "HK_Brennerstarts1","bitSize" => 8,"factor" => 1 },
 			{ "offset" =>  8,"name" => "HK_Brennerstarts2","bitSize" => 8,"factor" => 1 },
 			{ "offset" =>  10,"name" => "HK_Brennerstarts3","bitSize" => 8,"factor" => 1 },
+			]},
+	"1240" => {"name" => "Wagner_Sungo_100_Regler", "cmd" => "0100", "fields" => [
+			{ "offset" => 0, "name" => "Systemzeit", "bitSize" => 31, "timeRef" => 1 },
+			{ "offset" => 4, "name" => "Solar_Kollektortemp", "bitSize" => 15, "factor" => 0.1, "unit" => "°C" },
+			{ "offset" => 6, "name" => "Solar_Kesseltemp", "bitSize" => 15, "factor" => 0.1, "unit" => "°C" },
+			{ "offset" => 8, "name" => "Solar_VL", "bitSize" => 15, "factor" => 0.1, "unit" => "°C" },
+			{ "offset" => 10, "name" => "Solar_RL", "bitSize" => 15, "factor" => 0.1, "unit" => "°C" },
+			{ "offset" => 12, "name" => "Tage", "bitSize" => 15, "factor" => 1, "unit" => "T" },
+			{ "offset" => 16, "name" => "Volumenstrom_V40", "bitSize" => 31, "factor" => 1, "unit" => "1/h" },
+			{ "offset" => 20, "name" => "Drehzahl1", "bitSize" => 7, "factor" => 1, "unit" => "%" },
+			{ "offset" => 24, "name" => "Waermemenge", "bitSize" => 31, "factor" => 1, "unit" => "Wh" },
+			{ "offset" => 32, "name" => "Betriebstunden", "bitSize" => 31, "factor" => 1, "unit" => "h" },
+			{ "offset" => 44, "name" => "SW-Version", "bitSize" => 7, "factor" => 0.01 },
+			{ "offset" => 44, "name" => "Urlaubsfunktion", "bitSize" => 1, "factor" => 1 },
+			{ "offset" => 45, "name" => "Blockierschutz_1", "bitSize" => 7, "factor" => 1, "unit" => "%" },
+			{ "offset" => 69, "name" => "Speichermaximaltemperatur", "bitSize" => 1, "factor" => 1 },
+			{ "offset" => 72, "name" => "Fehlermaske", "bitSize" => 31, "factor" => 1 },
+			]},
+	"1241" => {"name" => "Wagner_Sungo_100_WMZ1", "cmd" => "0100", "fields" => [ 	
+			{ "offset" => 0,"name" => "Wmz1_Wert_Wh","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" => 4,"name" => "Wmz1_Leistung_W","bitSize" => 31,"factor" => 1,"unit" => "W" },
+			{ "offset" => 8,"name" => "Wmz1_WertHeute_Wh","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" => 12,"name" => "Wmz1_WertWoche_Wh","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
 			]},
 	"2211" => {"name" => "DeltaSol_CS_Plus", "cmd" => "0100", "fields" => [ 	
 			{ "offset" =>  0,"name" => "Temperatur_Sensor1","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },

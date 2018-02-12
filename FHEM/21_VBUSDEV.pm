@@ -1,5 +1,5 @@
 ##############################################
-# $Id: 21_VBUSDEV.pm 20171214 2017-12-14 10:10:10Z awk+pejonp $
+# $Id: 21_VBUSDEV.pm 20181202 2018-12-02 10:10:10Z pejonp $
 #
 # 21_VBUSDEV.pm
 # VBUS Client Device
@@ -8,7 +8,7 @@
 # (c) 2015 Frank Wurdinger <frank@wurdinger.de>
 # (c) 2015 Adrian Freihofer <adrian.freihofer gmail com>
 # (c) 2016 Tobias Faust <tobias.faust gmx net>	
-# (c) 2016 - 2017 Jörg (pejonp)
+# (c) 2016 - 2018 Jörg (pejonp)
 ##############################################  
 
 package main;
@@ -1177,7 +1177,7 @@ my %VBUS_devices = (
 			{ "offset" =>  8,"name" => "heatquantity2","bitSize" => 16,"unit" => "kWh" },
 			{ "offset" =>  10,"name" => "heatquantity3","bitSize" => 16,"unit" => "MWh" },
 			]},
-  "7731" => {"name" => "DeltaSol S2/S3", "cmd" => "0100", "fields" => [ 	
+  "7731" => {"name" => "DeltaSol_S2_S3", "cmd" => "0100", "fields" => [ 	
 			{ "offset" =>  0,"name" => "Temperatur_Sensor_1","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
 			{ "offset" =>  2,"name" => "Temperatur_Sensor_2","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
 			{ "offset" =>  4,"name" => "Temperatur_Sensor_3","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },

@@ -54,6 +54,9 @@ Hier die schon hinterlegten Geräte.
 |2271|DeltaSol_SLL|09.11.2016 (https://forum.fhem.de/index.php/topic,10303.msg518538.html#msg518538)
 |2272|DeltaSol_SLL_WMZ1|09.11.2016 (michaelfhem)
 |4010|WMZ|
+|4011|WMZ1| 11.09.2018
+|4012|WMZ2| 11.09.2018
+|4013|WMZ3| 11.09.2018
 |4211|SKSC1/2|
 |4212|DeltaSolC|
 |4213|Sonnenkraft_SKSC1HE|19.01.2017
@@ -104,7 +107,7 @@ Hier die schon hinterlegten Geräte.
 |7421|DeltaSol_BX|
 |7721|DeltaSolE_Regler|
 |7722|DeltaSolE_WMZ|
-|7731|DeltaSol_S2_S3|12.02.2018
+|7731|DeltaSol S2/S3|20.11.2017
 |7751|DiemasolC|
 |7821|Cosmo_Multi_Regler|
 |7822|Cosmo_Multi_WMZ|

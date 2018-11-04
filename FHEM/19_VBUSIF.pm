@@ -1,5 +1,5 @@
 ##############################################
-# $Id: 19_VBUSIF.pm 20170226 2017-02-26 10:10:10Z awk+pejonp $
+# $Id: 19_VBUSIF.pm 20180911 2018-09-11 10:10:10Z awk+pejonp $
 #
 # VBUS LAN Adapter Device
 # 19_VBUSIF.pm
@@ -154,7 +154,7 @@ sub VBUSIF_Read($@)
     	$idx +=1 if (substr($data,$idx,3) eq "aaa"); # Message endet mit a
     
 			$msg = substr($data,0,$idx);
-			$data = substr($data,$idx);
+			$data = "";#substr($data,$idx);
 			my $protoVersion = substr($msg,10,2);
     	Log3 $hash, 4,"$name:  VBUSIF_Read1: protoVersion : $protoVersion";
       
@@ -213,8 +213,8 @@ sub VBUSIF_Read($@)
       	Log3 $hash, 4,"$name:  VBUSIF_Read8: raus ";
 		}
 	} else {
-      Log3 $hash->{NAME}, 3,"$name:  VBUSIF_Read_Ende: $data ";
-      return "";
+      Log3 $hash->{NAME}, 4,"$name:  VBUSIF_Read_Ende: $data ";
+      #return "";
   }
 
 

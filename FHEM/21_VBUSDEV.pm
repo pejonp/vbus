@@ -1,5 +1,5 @@
 ##############################################
-# $Id: 21_VBUSDEV.pm 20171214 2017-12-14 10:10:10Z awk+pejonp $
+# $Id: 21_VBUSDEV.pm 20180911 2018-09-11 10:10:10Z pejonp $
 #
 # 21_VBUSDEV.pm
 # VBUS Client Device
@@ -8,7 +8,7 @@
 # (c) 2015 Frank Wurdinger <frank@wurdinger.de>
 # (c) 2015 Adrian Freihofer <adrian.freihofer gmail com>
 # (c) 2016 Tobias Faust <tobias.faust gmx net>	
-# (c) 2016 - 2017 Jörg (pejonp)
+# (c) 2016 - 2018 Jörg (pejonp)
 ##############################################  
 
 package main;
@@ -379,6 +379,42 @@ my %VBUS_devices = (
 			{ "offset" =>  15,"name" => "Glycol","bitSize" => 8,"factor" => 1,"unit" => "" },
 			{ "offset" =>  16,"name" => "Pressure","bitSize" => 8,"factor" => 1,"unit" => "bar" },
 			]},
+ "4011" => {"name" => "WMZ1", "cmd" => "0100", "fields" => [
+			{ "offset" =>  0,"name" => "Heat_kWh","bitSize" => 15,"factor" => 1,"unit" => "kWh" },
+			{ "offset" =>  2,"name" => "Heat_Wh","bitSize" => 15,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  4,"name" => "Flow_rate","bitSize" => 15,"factor" => 0.01,"unit" => "qm/h" },
+			{ "offset" =>  6,"name" => "Power","bitSize" => 8,"factor" => 10,"unit" => "W" },
+			{ "offset" =>  8,"name" => "Flow_temperature","bitSize" => 16,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  10,"name" => "Return_temperature","bitSize" => 16,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  12,"name" => "Heat_MWh","bitSize" => 15,"factor" => 1,"unit" => "MWh" },
+			{ "offset" =>  14,"name" => "Power2","bitSize" => 8,"factor" => 2560,"unit" => "W" },
+			{ "offset" =>  15,"name" => "Glycol","bitSize" => 8,"factor" => 1,"unit" => "" },
+			{ "offset" =>  16,"name" => "Pressure","bitSize" => 8,"factor" => 1,"unit" => "bar" },
+			]},
+ "4012" => {"name" => "WMZ2", "cmd" => "0100", "fields" => [
+			{ "offset" =>  0,"name" => "Heat_kWh","bitSize" => 15,"factor" => 1,"unit" => "kWh" },
+			{ "offset" =>  2,"name" => "Heat_Wh","bitSize" => 15,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  4,"name" => "Flow_rate","bitSize" => 15,"factor" => 0.01,"unit" => "qm/h" },
+			{ "offset" =>  6,"name" => "Power","bitSize" => 8,"factor" => 10,"unit" => "W" },
+			{ "offset" =>  8,"name" => "Flow_temperature","bitSize" => 16,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  10,"name" => "Return_temperature","bitSize" => 16,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  12,"name" => "Heat_MWh","bitSize" => 15,"factor" => 1,"unit" => "MWh" },
+			{ "offset" =>  14,"name" => "Power2","bitSize" => 8,"factor" => 2560,"unit" => "W" },
+			{ "offset" =>  15,"name" => "Glycol","bitSize" => 8,"factor" => 1,"unit" => "" },
+			{ "offset" =>  16,"name" => "Pressure","bitSize" => 8,"factor" => 1,"unit" => "bar" },
+			]},
+ "4013" => {"name" => "WMZ3", "cmd" => "0100", "fields" => [
+			{ "offset" =>  0,"name" => "Heat_kWh","bitSize" => 15,"factor" => 1,"unit" => "kWh" },
+			{ "offset" =>  2,"name" => "Heat_Wh","bitSize" => 15,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  4,"name" => "Flow_rate","bitSize" => 15,"factor" => 0.01,"unit" => "qm/h" },
+			{ "offset" =>  6,"name" => "Power","bitSize" => 8,"factor" => 10,"unit" => "W" },
+			{ "offset" =>  8,"name" => "Flow_temperature","bitSize" => 16,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  10,"name" => "Return_temperature","bitSize" => 16,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  12,"name" => "Heat_MWh","bitSize" => 15,"factor" => 1,"unit" => "MWh" },
+			{ "offset" =>  14,"name" => "Power2","bitSize" => 8,"factor" => 2560,"unit" => "W" },
+			{ "offset" =>  15,"name" => "Glycol","bitSize" => 8,"factor" => 1,"unit" => "" },
+			{ "offset" =>  16,"name" => "Pressure","bitSize" => 8,"factor" => 1,"unit" => "bar" },
+			]},           
 	"4211" => {"name" => "SKSC1/2", "cmd" => "0100", "fields" => [ 	
 			{ "offset" =>  0,"name" => "Temperatur_Sensor1","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
 			{ "offset" =>  2,"name" => "Temperatur_Sensor2","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
@@ -1177,7 +1213,7 @@ my %VBUS_devices = (
 			{ "offset" =>  8,"name" => "heatquantity2","bitSize" => 16,"unit" => "kWh" },
 			{ "offset" =>  10,"name" => "heatquantity3","bitSize" => 16,"unit" => "MWh" },
 			]},
-  "7731" => {"name" => "DeltaSol S2/S3", "cmd" => "0100", "fields" => [ 	
+  "7731" => {"name" => "DeltaSol_S2_S3", "cmd" => "0100", "fields" => [ 	
 			{ "offset" =>  0,"name" => "Temperatur_Sensor_1","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
 			{ "offset" =>  2,"name" => "Temperatur_Sensor_2","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
 			{ "offset" =>  4,"name" => "Temperatur_Sensor_3","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },

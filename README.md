@@ -80,7 +80,10 @@ Hier die schon hinterlegten Geräte.
 |7112|DeltaSol_BX_Plus_Regler| 03.04.2017
 |7113|DeltaSol_BX_Plus_Module| 03.04.2017
 |7121|DeltaSol_BX_Plus_Heizkreis| 03.04.2017
-|7131|DeltaSol_BX_Plus_WMZ| 03.04.2017
+|7131|DeltaSol_BX_Plus_WMZ1| 03.04.2017
+|7132|DeltaSol_BX_Plus_WMZ2| 11.08.2019
+|7133|DeltaSol_BX_Plus_WMZ3| 11.08.2019
+|7134|DeltaSol_BX_Plus_WMZ4| 11.08.2019
 |7160|SKS3HE|
 |7161|SKSC3HE_[HK1]|
 |7162|SKSC3HE_[HK2]|

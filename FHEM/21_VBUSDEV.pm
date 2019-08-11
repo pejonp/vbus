@@ -1,5 +1,5 @@
 ##############################################
-# $Id: 21_VBUSDEV.pm 20180911 2018-09-11 10:10:10Z pejonp $
+# $Id: 21_VBUSDEV.pm 20190811 2019-08-11 10:10:10Z pejonp $
 #
 # 21_VBUSDEV.pm
 # VBUS Client Device
@@ -8,7 +8,7 @@
 # (c) 2015 Frank Wurdinger <frank@wurdinger.de>
 # (c) 2015 Adrian Freihofer <adrian.freihofer gmail com>
 # (c) 2016 Tobias Faust <tobias.faust gmx net>	
-# (c) 2016 - 2018 Jörg (pejonp)
+# (c) 2016 - 2019 Jörg (pejonp)
 ##############################################  
 
 package main;
@@ -700,12 +700,30 @@ my %VBUS_devices = (
 			{ "offset" =>  0,"name" => "Vorlauf_Soll_Temperatur","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
 			{ "offset" =>  2,"name" => "Betriebsstatus","bitSize" => 8},
 			]},
-	"7131" => {"name" => "DeltaSol_BX_WMZ", "cmd" => "0100", "fields" => [
+	"7131" => {"name" => "DeltaSol_BX_WMZ1", "cmd" => "0100", "fields" => [
 			{ "offset" =>  0,"name" => "Waermemenge","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
 			{ "offset" =>  8,"name" => "Waermemenge_heute","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
 			{ "offset" =>  12,"name" => "Waermemenge_Woche","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
 			{ "offset" =>  16,"name" => "Gesamtvolumen","bitSize" => 31,"factor" => 1,"unit" => "l" },
 			]},
+  "7132" => {"name" => "DeltaSol_BX_WMZ2", "cmd" => "0100", "fields" => [
+			{ "offset" =>  0,"name" => "Waermemenge","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  8,"name" => "Waermemenge_heute","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  12,"name" => "Waermemenge_Woche","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  16,"name" => "Gesamtvolumen","bitSize" => 31,"factor" => 1,"unit" => "l" },
+			]},
+  "7133" => {"name" => "DeltaSol_BX_WMZ3", "cmd" => "0100", "fields" => [
+			{ "offset" =>  0,"name" => "Waermemenge","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  8,"name" => "Waermemenge_heute","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  12,"name" => "Waermemenge_Woche","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  16,"name" => "Gesamtvolumen","bitSize" => 31,"factor" => 1,"unit" => "l" },
+			]},
+  "7134" => {"name" => "DeltaSol_BX_WMZ4", "cmd" => "0100", "fields" => [
+			{ "offset" =>  0,"name" => "Waermemenge","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  8,"name" => "Waermemenge_heute","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  12,"name" => "Waermemenge_Woche","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  16,"name" => "Gesamtvolumen","bitSize" => 31,"factor" => 1,"unit" => "l" },
+			]},                  
 	"7160" => {"name" => "SKS3HE", "cmd" => "0100", "fields" => [
 			{ "offset" => 0, "name" => "7160_Temperatur_Sensor_1", "bitSize" => 15, "factor" => 0.1, "unit" => "°C" },
 			{ "offset" => 2, "name" => "7160_Temperatur_Sensor_2", "bitSize" => 15, "factor" => 0.1, "unit" => "°C" },

@@ -1,5 +1,5 @@
 ##############################################
-# $Id: 21_VBUSDEV.pm 20190811 2019-08-11 10:10:10Z pejonp $
+# $Id: 21_VBUSDEV.pm 20192612 2019-26-12 10:10:10Z pejonp $
 #
 # 21_VBUSDEV.pm
 # VBUS Client Device
@@ -1366,7 +1366,7 @@ my %VBUS_devices = (
 			{ "offset" => 88,"name" => "Drehzahl_13","bitSize" => 8,"factor" => 1,"unit" => "%" },
 			{ "offset" => 89,"name" => "Drehzahl_14","bitSize" => 8,"factor" => 1,"unit" => "%" },
 			{ "offset" => 92,"name" => "Systemdatum","bitSize" => 31},
-			{ "offset" => 96,"name" => "Fehlermaske","bitSize" => 31},
+			{ "offset" => 96,"name" => "Fehlermaske","bitSize" => 31},   
 			]},
 	"7E12" => {"name" => "DeltaSol_MX_Module", "cmd" => "0100", "fields" => [
 			{ "offset" =>  0,"name" => "Temperatur_M1_S1","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
@@ -1404,7 +1404,7 @@ my %VBUS_devices = (
 			{ "offset" =>  0,"name" => "Vorlauf_Soll_Temperatur","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
 			{ "offset" =>  2,"name" => "Betriebsstatus","bitSize" => 8},
 			]},
-	"7E31" => {"name" => "DeltaSol_MX_WMZ", "cmd" => "0100", "fields" => [
+	"7E31" => {"name" => "DeltaSol_MX_WMZ1", "cmd" => "0100", "fields" => [
 			{ "offset" =>  0,"name" => "Waermemenge","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
 			{ "offset" =>  8,"name" => "Waermemenge_heute","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
 			{ "offset" =>  12,"name" => "Waermemenge_Woche","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
@@ -1415,6 +1415,74 @@ my %VBUS_devices = (
 			{ "offset" =>  32,"name" => "Volumen_Monat","bitSize" => 31,"factor" => 1,"unit" => "l" },                  
 			{ "offset" =>  36,"name" => "Waermemenge2","bitSize" => 31,"factor" => 1000,"unit" => "Wh" },
 			]},
+"7E32" => {"name" => "DeltaSol_MX_WMZ2", "cmd" => "0100", "fields" => [
+			{ "offset" =>  0,"name" => "Waermemenge","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  8,"name" => "Waermemenge_heute","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  12,"name" => "Waermemenge_Woche","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  16,"name" => "Gesamtvolumen","bitSize" => 31,"factor" => 1,"unit" => "l" },
+			{ "offset" =>  20,"name" => "Waermemenge_Monat","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  24,"name" => "Volumen_heute","bitSize" => 31,"factor" => 1,"unit" => "l" },
+			{ "offset" =>  28,"name" => "Volumen_Woche","bitSize" => 31,"factor" => 1,"unit" => "l" },
+			{ "offset" =>  32,"name" => "Volumen_Monat","bitSize" => 31,"factor" => 1,"unit" => "l" },                  
+			{ "offset" =>  36,"name" => "Waermemenge2","bitSize" => 31,"factor" => 1000,"unit" => "Wh" },
+			]},
+"7E33" => {"name" => "DeltaSol_MX_WMZ3", "cmd" => "0100", "fields" => [
+			{ "offset" =>  0,"name" => "Waermemenge","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  8,"name" => "Waermemenge_heute","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  12,"name" => "Waermemenge_Woche","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  16,"name" => "Gesamtvolumen","bitSize" => 31,"factor" => 1,"unit" => "l" },
+			{ "offset" =>  20,"name" => "Waermemenge_Monat","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  24,"name" => "Volumen_heute","bitSize" => 31,"factor" => 1,"unit" => "l" },
+			{ "offset" =>  28,"name" => "Volumen_Woche","bitSize" => 31,"factor" => 1,"unit" => "l" },
+			{ "offset" =>  32,"name" => "Volumen_Monat","bitSize" => 31,"factor" => 1,"unit" => "l" },                  
+			{ "offset" =>  36,"name" => "Waermemenge2","bitSize" => 31,"factor" => 1000,"unit" => "Wh" },
+			]},
+"7E34" => {"name" => "DeltaSol_MX_WMZ4", "cmd" => "0100", "fields" => [
+			{ "offset" =>  0,"name" => "Waermemenge","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  8,"name" => "Waermemenge_heute","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  12,"name" => "Waermemenge_Woche","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  16,"name" => "Gesamtvolumen","bitSize" => 31,"factor" => 1,"unit" => "l" },
+			{ "offset" =>  20,"name" => "Waermemenge_Monat","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  24,"name" => "Volumen_heute","bitSize" => 31,"factor" => 1,"unit" => "l" },
+			{ "offset" =>  28,"name" => "Volumen_Woche","bitSize" => 31,"factor" => 1,"unit" => "l" },
+			{ "offset" =>  32,"name" => "Volumen_Monat","bitSize" => 31,"factor" => 1,"unit" => "l" },                  
+			{ "offset" =>  36,"name" => "Waermemenge2","bitSize" => 31,"factor" => 1000,"unit" => "Wh" },
+			]},
+"7E35" => {"name" => "DeltaSol_MX_WMZ5", "cmd" => "0100", "fields" => [
+			{ "offset" =>  0,"name" => "Waermemenge","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  8,"name" => "Waermemenge_heute","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  12,"name" => "Waermemenge_Woche","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  16,"name" => "Gesamtvolumen","bitSize" => 31,"factor" => 1,"unit" => "l" },
+			{ "offset" =>  20,"name" => "Waermemenge_Monat","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  24,"name" => "Volumen_heute","bitSize" => 31,"factor" => 1,"unit" => "l" },
+			{ "offset" =>  28,"name" => "Volumen_Woche","bitSize" => 31,"factor" => 1,"unit" => "l" },
+			{ "offset" =>  32,"name" => "Volumen_Monat","bitSize" => 31,"factor" => 1,"unit" => "l" },                  
+			{ "offset" =>  36,"name" => "Waermemenge2","bitSize" => 31,"factor" => 1000,"unit" => "Wh" },
+			]},
+"7E36" => {"name" => "DeltaSol_MX_WMZ6", "cmd" => "0100", "fields" => [
+			{ "offset" =>  0,"name" => "Waermemenge","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  8,"name" => "Waermemenge_heute","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  12,"name" => "Waermemenge_Woche","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  16,"name" => "Gesamtvolumen","bitSize" => 31,"factor" => 1,"unit" => "l" },
+			{ "offset" =>  20,"name" => "Waermemenge_Monat","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
+			{ "offset" =>  24,"name" => "Volumen_heute","bitSize" => 31,"factor" => 1,"unit" => "l" },
+			{ "offset" =>  28,"name" => "Volumen_Woche","bitSize" => 31,"factor" => 1,"unit" => "l" },
+			{ "offset" =>  32,"name" => "Volumen_Monat","bitSize" => 31,"factor" => 1,"unit" => "l" },                  
+			{ "offset" =>  36,"name" => "Waermemenge2","bitSize" => 31,"factor" => 1000,"unit" => "Wh" },
+			]},                              
+  "7E41" => {"name" => "DeltaSol_MX_Modul_1", "cmd" => "0100", "fields" => [
+			{ "offset" =>  0,"name" => "Temperatur_1","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  2,"name" => "Temperatur_2","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  4,"name" => "Temperatur_3","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  6,"name" => "Temperatur_4","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  8,"name" => "Temperatur_5","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" => 10,"name" => "Temperatur_6","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" => 12,"name" => "Drehzahl_1","bitSize" => 8,"factor" => 1,"unit" => "%" },
+			{ "offset" => 13,"name" => "Drehzahl_2","bitSize" => 8,"factor" => 1,"unit" => "%" },
+			{ "offset" => 14,"name" => "Drehzahl_3","bitSize" => 8,"factor" => 1,"unit" => "%" },
+			{ "offset" => 15,"name" => "Drehzahl_4","bitSize" => 8,"factor" => 1,"unit" => "%" },
+			{ "offset" => 16,"name" => "Drehzahl_5","bitSize" => 8,"factor" => 1,"unit" => "%" },
+			]},    
 );
 
 sub VBUSDEV_DbLog_splitFn($);
@@ -1465,23 +1533,7 @@ sub VBUSDEV_Define($$)
    $hash->{STATE} = "Defined";
       
    my $name= $hash->{NAME};
-   return undef;
-
-	#my ($name, $type, $code, $interval) = @args;
-
-	#$hash->{STATE} = 'Initialized';
-	#$hash->{CODE} = $code;
-
-	#AssignIoPort($hash,$iodev) if (!$hash->{IODev});
-	#if(defined($hash->{IODev}->{NAME})) {
-	#	Log3 $hash, 3, "VBUSDEV_Define: $name: I/O device is " . $hash->{IODev}->{NAME};
-	#} else {
-	#	Log3 $hash, 1, "VBUSDEV_Define: $name: no I/O device";
-	#}
-	#$modules{VBUSDEV}{defptr}{$code} = $hash;
-	#return undef;
-  
-  
+   return undef; 
 }
 
 sub VBUSDEV_Undefine($$)
@@ -1530,6 +1582,19 @@ sub VBUSDEV_Parse($$)
 	my $devtype = $VBUS_devices{$src_addr};
   my $hash = $modules{VBUSDEV}{defptr}{$src_addr};
 	
+  my $frameCount = hex(substr($msg,16,2));
+	my $headerCRC  = hex(substr($msg,18,2));
+  
+  if( length($msg) >=20)
+  {
+   Log3 $iodev, 5, "VBUSDEV_Parse0a OK: ioName: ".$ioName. " count: " . $frameCount . " CRC: " . $headerCRC;;
+  }
+  else{
+   Log3 $iodev, 5, "VBUSDEV_Parse0a NOK: ioName: ".$ioName. " count: " . $frameCount . " CRC: " . $headerCRC;;
+      $cmd_ok = 0;
+      return "";
+  }
+  
   Log3 $iodev, 4, "VBUSDEV_Parse00: ioName: ".$ioName. " DST-ADR: " . $dst_addr . " SRC-ADR: " . $src_addr;;
   
   if ($dst_addr == "0000")
@@ -1625,9 +1690,9 @@ sub VBUSDEV_ParsePayload($@)
   my $devname = $devtype->{name};
   #my $devname = $devtype->{code};
 
-  #Log3 $hash, 4, "$name: VBUSDEV_ParsePayLoad1: Command: ".$cmd." Code " . $code . " DevTyp: ".$devname." Name: ".$name ;
-  #return undef if ($cmd != $devtype->{cmd});
-  #Log3 $hash, 4, "$name: VBUSDEV_ParsePayload2: Dev: $devname CMD: $cmd  PayL: $payload";
+  Log3 $hash, 4, "$name: VBUSDEV_ParsePayLoad1: Command: ".$cmd." Code " . $code . " DevTyp: ".$devname." Name: ".$name ;
+  return undef if ($cmd != $devtype->{cmd});
+  Log3 $hash, 4, "$name: VBUSDEV_ParsePayload2: Dev: $devname CMD: $cmd  PayL: $payload";
  
 	readingsBeginUpdate($hash);
 
@@ -1649,7 +1714,7 @@ sub VBUSDEV_ParsePayload($@)
 			$val = substr($payload, $o+6,2).substr($payload, $o+4,2).substr($payload, $o+2,2).substr($payload, $o,2);
 		}
 
-		 #Log3 $hash, 4, "$name: VBUSDEV_ParsePayload3: code: " . $code ." : " . $fieldname . " = " . $val;
+		 Log3 $hash, 4, "$name: VBUSDEV_ParsePayload3: code: " . $code ." : " . $fieldname . " = " . $val;
 
 		#Aenderung: statt: $val = hex($val); um negative Werte anzuzeigen
 		if ($bitsize == 15) {

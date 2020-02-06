@@ -1423,11 +1423,27 @@ my %VBUS_devices = (
 			{ "offset" =>  56,"name" => "Temperatur_M5_S5","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
 			{ "offset" =>  58,"name" => "Temperatur_M5_S6","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
 			]},
-	"7E21" => {"name" => "DeltaSol_MX_Heizkreis", "cmd" => "0100", "fields" => [
+"7E20" => {"name" => "DeltaSol_MX_Heizkreis0", "cmd" => "0100", "fields" => [
+			{ "offset" =>  0,"name" => "Vorlauf_Soll_Temperatur","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  2,"name" => "Betriebsstatus","bitSize" => 8},
+			]},      
+"7E21" => {"name" => "DeltaSol_MX_Heizkreis1", "cmd" => "0100", "fields" => [
 			{ "offset" =>  0,"name" => "Vorlauf_Soll_Temperatur","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
 			{ "offset" =>  2,"name" => "Betriebsstatus","bitSize" => 8},
 			]},
-	"7E31" => {"name" => "DeltaSol_MX_WMZ1", "cmd" => "0100", "fields" => [
+"7E22" => {"name" => "DeltaSol_MX_Heizkreis2", "cmd" => "0100", "fields" => [
+			{ "offset" =>  0,"name" => "Vorlauf_Soll_Temperatur","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  2,"name" => "Betriebsstatus","bitSize" => 8},
+			]},
+"7E23" => {"name" => "DeltaSol_MX_Heizkreis3", "cmd" => "0100", "fields" => [
+			{ "offset" =>  0,"name" => "Vorlauf_Soll_Temperatur","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  2,"name" => "Betriebsstatus","bitSize" => 8},
+			]},
+"7E24" => {"name" => "DeltaSol_MX_Heizkreis4", "cmd" => "0100", "fields" => [
+			{ "offset" =>  0,"name" => "Vorlauf_Soll_Temperatur","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  2,"name" => "Betriebsstatus","bitSize" => 8},
+			]},                  
+"7E31" => {"name" => "DeltaSol_MX_WMZ1", "cmd" => "0100", "fields" => [
 			{ "offset" =>  0,"name" => "Waermemenge","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
 			{ "offset" =>  8,"name" => "Waermemenge_heute","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
 			{ "offset" =>  12,"name" => "Waermemenge_Woche","bitSize" => 31,"factor" => 1,"unit" => "Wh" },

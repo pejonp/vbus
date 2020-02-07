@@ -1,5 +1,5 @@
 ##############################################
-# $Id: 21_VBUSDEV.pm 20203001 2020-30-01 10:10:10Z pejonp $
+# $Id: 21_VBUSDEV.pm 20200702 2020-07-02 10:10:10Z pejonp $
 #
 # 21_VBUSDEV.pm
 # VBUS Client Device

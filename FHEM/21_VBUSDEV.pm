@@ -1,5 +1,5 @@
 ##############################################
-# $Id: 21_VBUSDEV.pm 20200702 2020-07-02 10:10:10Z pejonp $
+# $Id: 21_VBUSDEV.pm 20201002 2020-10-02 10:10:10Z pejonp $
 #
 # 21_VBUSDEV.pm
 # VBUS Client Device
@@ -80,7 +80,7 @@ my %VBUS_devices = (
 			{ "offset" => 28,"name" => "Waerme_jahr","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
 			{ "offset" => 32,"name" => "Waerme_vorjahr","bitSize" => 31,"factor" => 1,"unit" => "Wh" },
 			{ "offset" => 36,"name" => "Volumen_gesamt", "bitSize" => 31, "factor" => 1, "unit" => "1/h" },
-			{ "offset" => 40,"name" => "Volumen_heute", "bitSize" => 31, "factor" => 1, "unit" => "1/h" },
+			{ "offset" => 40,"name" => "Volumen_heute", "bitSize" => 31, "factor" => 1, "unit" => "l/h" },
 			{ "offset" => 44,"name" => "Volumen_gestern", "bitSize" => 31, "factor" => 1, "unit" => "1/h" },
 			{ "offset" => 48,"name" => "Volumen_woche", "bitSize" => 31, "factor" => 1, "unit" => "1/h" },
 			{ "offset" => 52,"name" => "Volumen_vorwoche","bitSize" => 31,"factor" => 1,"unit" => "l/h" },
@@ -1782,7 +1782,7 @@ sub VBUSDEV_ParsePayload($@)
 			}
 		# auf o,5 °C Runden
 			elsif ($unit eq "°C") {
-			 	$val =  ($val >= 0 ? ceil($val*2)/2 : floor($val*2)/2);
+			 	 $val =  sprintf("%.1f", $val);
 			}
 		# Runden ende
 			my $val2 = $val." ".$unit;

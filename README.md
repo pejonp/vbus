@@ -115,7 +115,7 @@ Hier die schon hinterlegten Geräte.
 |7751|DiemasolC|
 |7821|Cosmo_Multi_Regler|
 |7822|Cosmo_Multi_WMZ|
-|7E11|DeltaSol_MX_Regler|
+|7E11|DeltaSol_MX_Regler| angepaßt 13.02.2020
 |7E12|DeltaSol_MX_Module|
 |7E20-24|DeltaSol_MX_Heizkreis| angepaßt 07.02.2020
 |7E31-36|DeltaSol_MX_WMZ1-6| angepaßt 26.12.2019

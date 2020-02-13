@@ -1,5 +1,5 @@
 ##############################################
-# $Id: 21_VBUSDEV.pm 20201002 2020-10-02 10:10:10Z pejonp $
+# $Id: 21_VBUSDEV.pm 20201302 2020-13-02 10:10:10Z pejonp $
 #
 # 21_VBUSDEV.pm
 # VBUS Client Device
@@ -1389,7 +1389,12 @@ my %VBUS_devices = (
 			{ "offset" => 88,"name" => "Drehzahl_13","bitSize" => 8,"factor" => 1,"unit" => "%" },
 			{ "offset" => 89,"name" => "Drehzahl_14","bitSize" => 8,"factor" => 1,"unit" => "%" },
 			{ "offset" => 92,"name" => "Systemdatum","bitSize" => 31},
-			{ "offset" => 96,"name" => "Fehlermaske","bitSize" => 31},   
+			{ "offset" => 96,"name" => "Fehlermaske","bitSize" => 31}, 
+      { "offset" => 100,"name" => "AusgangA","bitSize" => 8,"factor" => 1,"unit" => "%" },
+			{ "offset" => 101,"name" => "AusgangB","bitSize" => 8,"factor" => 1,"unit" => "%" },
+			{ "offset" => 102,"name" => "AusgangC","bitSize" => 8,"factor" => 1,"unit" => "%" },
+			{ "offset" => 103,"name" => "AusgangD","bitSize" => 8,"factor" => 1,"unit" => "%" },  
+   		{ "offset" => 104,"name" => "Volumenstrom_21","bitSize" => 31,"factor" => 1,"unit" => "l/h" },
 			]},
 	"7E12" => {"name" => "DeltaSol_MX_Module", "cmd" => "0100", "fields" => [
 			{ "offset" =>  0,"name" => "Temperatur_M1_S1","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },

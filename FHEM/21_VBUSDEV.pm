@@ -1,5 +1,5 @@
 ##############################################
-# $Id: 21_VBUSDEV.pm 20201302 2020-13-02 10:10:10Z pejonp $
+# $Id: 21_VBUSDEV.pm 20200420 2020-04-20 10:10:10Z pejonp $
 #
 # 21_VBUSDEV.pm
 # VBUS Client Device
@@ -9,15 +9,66 @@
 # (c) 2015 Adrian Freihofer <adrian.freihofer gmail com>
 # (c) 2016 Tobias Faust <tobias.faust gmx net>	
 # (c) 2016 - 2020 Jörg (pejonp)
+# (c) 20.04.2020 Anpassungen Perl (pejonp)
 ##############################################  
 
-package main;
-
+package FHEM::VBUSDEV;
 use strict;
 use warnings;
-use POSIX;
+no if $] >= 5.017011, warnings => 'experimental::smartmatch';
+#no warnings 'portable';    # Support for 64-bit ints required
 use SetExtensions;
 use Data::Dumper;
+use Device::SerialPort;
+use GPUtils qw(GP_Import GP_Export);
+use Time::HiRes qw(gettimeofday usleep);
+use Scalar::Util qw(looks_like_number);
+use feature qw/say switch/;
+use FHEM::Meta;
+main::LoadModule('VBUSIF');
+
+## Import der FHEM Funktionen
+#-- Run before package compilation
+BEGIN {
+
+    # Import from main context
+    GP_Import(
+        qw(
+          readingsBulkUpdate
+          readingsBeginUpdate
+          readingsEndUpdate
+          defs
+          modules
+          Log3
+          attr
+          readingFnAttributes
+          AttrVal
+          ReadingsVal
+          Value
+          FmtDateTime
+          strftime
+          GetTimeSpec
+          InternalTimer
+          AssignIoPort
+          DevIo_CloseDev
+          DevIo_OpenDev
+          DevIo_SimpleWrite
+          DevIo_SimpleRead
+          RemoveInternalTimer
+          getUniqueId
+          getKeyValue
+          TimeNow
+          Dispatch )
+    );
+}
+
+#-- Export to main context with different name
+GP_Export(
+    qw(
+      Initialize
+      )
+);
+
 
 my %VBUS_devices = (
 	"0050" => {"name" => "DL_2", "cmd" => "0100", "fields" => [
@@ -1529,39 +1580,38 @@ my %VBUS_devices = (
 			]},    
 );
 
-sub VBUSDEV_DbLog_splitFn($);
-sub VBUSDEV_Initialize($)
+sub Initialize()
 {
-	my ($hash) = @_;
+	my $hash = shift;
  # require "$attr{global}{modpath}/FHEM/19_VBUSIF.pm";
-
-
 	my @modellist;
-	foreach my $model (keys %VBUS_devices){
+	for my $model (keys %VBUS_devices){
 		push @modellist,$VBUS_devices{$model}->{name};
 	}
 	# aa100051771000010a0c5100382204507e01270200571b016000057e35003822056b38223822054638220000012400000000007f42744a00007f0f513301006b0a050001016e, help me!
 
 	# Consumer
 	$hash->{Match}		= "^aa.*";
-	$hash->{DefFn}		= "VBUSDEV_Define";
-	$hash->{UndefFn}	= "VBUSDEV_Undefine";
-	$hash->{ParseFn}	= "VBUSDEV_Parse";
-	$hash->{AttrList}	= "IODev "
+	$hash->{DefFn}		= \&Define;
+	$hash->{UndefFn}	= \&Undefine;
+	$hash->{ParseFn}	= \&Parse;
+	$hash->{AttrList}	= \&IODev
                       ."$readingFnAttributes"
 	                    ." model:"  .join(",", sort @modellist);
-  $hash->{DbLog_splitFn} = "VBUSDEV_DbLog_splitFn";                      
+  $hash->{DbLog_splitFn} = \&DbLog_splitFn;                      
 	$hash->{AutoCreate}	= { "VBUSDEV.*" => { ATTR => "event-min-interval:.*:120 event-on-change-reading:.* verbose:1 ",FILTER => "%NAME"}
 		};
+    return;
 }
 
-sub VBUSDEV_Define($$)
+sub Define()
 {
-	my ($hash, $def) = @_;
+	my $hash = shift;
+  my $def = shift;
 	my @args = split("[ \t]+", $def);
 	my $iodev;
 	my $i = 0;
-	foreach my $param ( @args ) {
+	for my $param ( @args ) {
 		if ($param =~ m/IODev=(.*)/) {
 			$iodev = $1;
 		splice( @args, $i, 1 );
@@ -1577,21 +1627,22 @@ sub VBUSDEV_Define($$)
    $hash->{STATE} = "Defined";
       
    my $name= $hash->{NAME};
-   return undef; 
+   return; 
 }
 
-sub VBUSDEV_Undefine($$)
+sub Undefine()
 {
-	my ($hash,$arg) = @_;
+	my $hash = shift;
+  my $def = shift;
 	my $code = $hash->{CODE};
 	$code = $hash->{IODev}->{NAME} ."-". $code if( defined($hash->{IODev}->{NAME}) );
 	delete($modules{VBUSDEV}{defptr}{$code});
-	return undef;
+	return;
 }
 
-sub VBUSDEV_DbLog_splitFn($) {
+sub DbLog_splitFn() {
 ##################################################################################
-my ($event) = @_;
+my $event = shift;
     Log3 undef, 4, "in DbLog_splitFn empfangen: $event"; 
     my ($reading, $value, $unit) = "";
 
@@ -1613,9 +1664,11 @@ my ($event) = @_;
 return ($reading, $value, $unit);
 }
 
-sub VBUSDEV_Parse($$)
+sub Parse()
 {
-  my ($iodev, $msg, $local) = @_;
+  my $iodev = shift;
+  my $msg = shift;
+  my $local = shift;
 	my $ioName = $iodev->{NAME};
   my $cmd_ok = 0;
 
@@ -1631,61 +1684,61 @@ sub VBUSDEV_Parse($$)
   
   if( length($msg) >=20)
   {
-   Log3 $iodev, 5, "VBUSDEV_Parse0a OK: ioName: ".$ioName. " count: " . $frameCount . " CRC: " . $headerCRC;;
+   Log3 $iodev, 5, "Parse0a OK: ioName: ".$ioName. " count: " . $frameCount . " CRC: " . $headerCRC;;
   }
   else{
-   Log3 $iodev, 5, "VBUSDEV_Parse0a NOK: ioName: ".$ioName. " count: " . $frameCount . " CRC: " . $headerCRC;;
+   Log3 $iodev, 5, "Parse0a NOK: ioName: ".$ioName. " count: " . $frameCount . " CRC: " . $headerCRC;;
       $cmd_ok = 0;
       return "";
   }
   
-  Log3 $iodev, 4, "VBUSDEV_Parse00: ioName: ".$ioName. " DST-ADR: " . $dst_addr . " SRC-ADR: " . $src_addr;;
+  Log3 $iodev, 4, "Parse00: ioName: ".$ioName. " DST-ADR: " . $dst_addr . " SRC-ADR: " . $src_addr;;
   
   if ($dst_addr == "0000")
   {
-   	  Log3 $iodev, 4, "VBUSDEV_Parse01: Broadcast ioName: ".$ioName. " DST-ADR: " . $dst_addr;
+   	  Log3 $iodev, 4, "Parse01: Broadcast ioName: ".$ioName. " DST-ADR: " . $dst_addr;
       $cmd_ok = 0;
       return "";
   }
 
   if ($dst_addr == "0010")
   {
-   		Log3 $iodev, 4, "VBUSDEV_Parse02: DFA       ioName: ".$ioName. " DST-ADR: " . $dst_addr;
+   		Log3 $iodev, 4, "Parse02: DFA       ioName: ".$ioName. " DST-ADR: " . $dst_addr;
       $cmd_ok = 1;
   }
   
    if ($dst_addr == "0015")
   {
    		
-      Log3 $iodev, 4, "VBUSDEV_Parse03: Standard-Infos ioName: ".$ioName. " DST-ADR: " . $dst_addr;
+      Log3 $iodev, 4, "Parse03: Standard-Infos ioName: ".$ioName. " DST-ADR: " . $dst_addr;
       $cmd_ok = 0;
       return "";
   }
   
    if ($dst_addr == "0020")
   {
-   		Log3 $iodev, 4, "VBUSDEV_Parse04: Computer       ioName: ".$ioName. " DST-ADR: " . $dst_addr;
+   		Log3 $iodev, 4, "Parse04: Computer       ioName: ".$ioName. " DST-ADR: " . $dst_addr;
       $cmd_ok = 0;
 		  return "";
   }
   
    if ($dst_addr == "0040")
   {
-   		Log3 $iodev, 4, "VBUSDEV_Parse05: SD3 / GAx      ioName: ".$ioName. " DST-ADR: " . $dst_addr;
+   		Log3 $iodev, 4, "Parse05: SD3 / GAx      ioName: ".$ioName. " DST-ADR: " . $dst_addr;
       $cmd_ok = 0;
 		  return "";
   }
 
    if ($dst_addr == "0050")
   {
-   		Log3 $iodev, 4, "VBUSDEV_Parse06: DL2      ioName: ".$ioName. " DST-ADR: " . $dst_addr;
+   		Log3 $iodev, 4, "Parse06: DL2      ioName: ".$ioName. " DST-ADR: " . $dst_addr;
       $cmd_ok = 0;
 		  return "";
   }
 
      if ($dst_addr == "6521")
   {
-  		Log3 $iodev, 4, "VBUSDEV_Parse07: MSR65    ioName: ".$ioName. " DST-ADR: " . $dst_addr;
+  		Log3 $iodev, 4, "Parse07: MSR65    ioName: ".$ioName. " DST-ADR: " . $dst_addr;
       $cmd_ok = 1;
       $dst_addr = "0010";
       $src_addr = "6521";     
@@ -1698,7 +1751,7 @@ sub VBUSDEV_Parse($$)
   
 	if ( defined $devtype->{dst_addr} ) {
 		if ( $devtype->{dst_addr} ne $dst_addr ) {
-			 Log3 $iodev, 4, "VBUSDEV_Parse10: $ioName : skip frame $devtype->{dst_addr} $dst_addr";
+			 Log3 $iodev, 4, "Parse10: $ioName : skip frame $devtype->{dst_addr} $dst_addr";
 			return "";
 		}
 	}
@@ -1706,37 +1759,41 @@ sub VBUSDEV_Parse($$)
 	 $hash = $modules{VBUSDEV}{defptr}{$src_addr};
 	if(!$hash) {
 		my $ret = "UNDEFINED VBUSDEV_$src_addr VBUSDEV $src_addr";
-		Log3 $hash, 4, "VBUSDEV_Parse11: $ioName : $ret, please define it";
+		Log3 $hash, 4, "Parse11: $ioName : $ret, please define it";
 		DoTrigger("global", $ret);
 		return "";
 	}
 
-   Log3 $iodev, 4, "VBUSDEV_Parse12: ".$ioName. " DST-ADR: " . $dst_addr . " SRC-ADR: " . $src_addr;
+   Log3 $iodev, 4, "Parse12: ".$ioName. " DST-ADR: " . $dst_addr . " SRC-ADR: " . $src_addr;
 
 
-	foreach my $mod (keys %{$modules{VBUSDEV}{defptr}}) {
+	for my $mod (keys %{$modules{VBUSDEV}{defptr}}) {
   	my $hash = $modules{VBUSDEV}{defptr}{"$src_addr"};
 		$attr{$hash->{NAME}}{model} = $devtype->{name};
     my $command = substr($msg,14,2).substr($msg,12,2);
 		my $payload = substr($msg,20);
-    Log3 $iodev, 4, "VBUSDEV_Parse20 : Command " . $command . " DevTyp: ".$devtype." Model: ".$mod." MSG: " . $payload;
-   	VBUSDEV_ParsePayload($hash, $devtype, $command, $payload);
+    Log3 $iodev, 4, "Parse20 : Command " . $command . " DevTyp: ".$devtype." Model: ".$mod." MSG: " . $payload;
+   	ParsePayload($hash, $devtype, $command, $payload);
 		return $hash->{NAME};
 	}
 	return "";
 }
 
-sub VBUSDEV_ParsePayload($@)
+sub ParsePayload()
 {
-	my ($hash, $devtype, $cmd, $payload) = @_;
+	my $hash = shift;
+  my $devtype = shift;
+  my $cmd = shift;
+  my $payload = shift;
 	my $name = $hash->{NAME};
   my $code = $hash->{CODE};
   my $devname = $devtype->{name};
   #my $devname = $devtype->{code};
 
-  Log3 $hash, 4, "$name: VBUSDEV_ParsePayLoad1: Command: ".$cmd." Code " . $code . " DevTyp: ".$devname." Name: ".$name ;
-  return undef if ($cmd != $devtype->{cmd});
-  Log3 $hash, 4, "$name: VBUSDEV_ParsePayload2: Dev: $devname CMD: $cmd  PayL: $payload";
+  Log3 $hash, 4, "$name: ParsePayLoad1: Command: ".$cmd." Code " . $code . " DevTyp: ".$devname." Name: ".$name ;
+  #return undef if ($cmd != $devtype->{cmd});
+  return if ($cmd != $devtype->{cmd});
+  Log3 $hash, 4, "$name: ParsePayload2: Dev: $devname CMD: $cmd  PayL: $payload";
  
 	readingsBeginUpdate($hash);
 
@@ -1758,7 +1815,7 @@ sub VBUSDEV_ParsePayload($@)
 			$val = substr($payload, $o+6,2).substr($payload, $o+4,2).substr($payload, $o+2,2).substr($payload, $o,2);
 		}
 
-		 Log3 $hash, 4, "$name: VBUSDEV_ParsePayload3: code: " . $code ." : " . $fieldname . " = " . $val;
+		 Log3 $hash, 4, "$name: ParsePayload3: code: " . $code ." : " . $fieldname . " = " . $val;
 
 		#Aenderung: statt: $val = hex($val); um negative Werte anzuzeigen
 		if ($bitsize == 15) {
@@ -1798,8 +1855,8 @@ sub VBUSDEV_ParsePayload($@)
 				$oldval = $fld->{VAL};
 			}
 			readingsBulkUpdate($hash,$fieldname,$val2); # if ($val ne $oldval);
-      #Log3 $hash, 4, "$name: VBUSDEV_ParsePayload4: code: " . $code ." : " . $fieldname . " = " . $val ." ".$unit;
-      Log3 $hash, 4, "$name: VBUSDEV_ParsePayload4: code: " . $code ." : " . $fieldname . " = " . $val2;
+      #Log3 $hash, 4, "$name: ParsePayload4: code: " . $code ." : " . $fieldname . " = " . $val ." ".$unit;
+      Log3 $hash, 4, "$name: ParsePayload4: code: " . $code ." : " . $fieldname . " = " . $val2;
      	}
 	}
   
@@ -1808,24 +1865,24 @@ sub VBUSDEV_ParsePayload($@)
 	$code = $hash->{IODev}->{NAME} ."_". $code if( defined($hash->{IODev}->{NAME}) );
 	my $def = $modules{VBUSDEV}{defptr}{$hash->{NAME}.".".$code};
   $def = $modules{VBUSDEV}{defptr}{$code} if(!$def);
-  Log3 $hash, 4, "$name VBUSDEV_ParsePayload5: $name ($code) $devtype";  
+  Log3 $hash, 4, "$name ParsePayload5: $name ($code) $devtype";  
   
     
         if(!$def) {
-    		Log3 $hash, 4, '$name VBUSDEV_ParsePayload6: UNDEFINED Modul ' . $code;
+    		Log3 $hash, 4, '$name ParsePayload6: UNDEFINED Modul ' . $code;
     		return "UNDEFINED $name VBUSDEV $code";
         }
     
       $hash = $def;
     	$name = $hash->{NAME};
       $code = $hash->{CODE};    	
-    	Log3 $hash, 4, "$name VBUSDEV_ParsePayload7: $name ($code) $devtype)";  
+    	Log3 $hash, 4, "$name ParsePayload7: $name ($code) $devtype)";  
 
 
 
 	readingsEndUpdate($hash, 1);
 
-	return undef;
+	return;
 }
 1;
 
@@ -1847,7 +1904,7 @@ sub VBUSDEV_ParsePayload($@)
 
 
   <br />
-  <a name="VBUSDEV_Define"></a>
+  <a name="Define"></a>
   <b>Define</b>
   <ul>
     <code>define &lt;name&gt; VBUSDEV &lt;id&gt; [&lt;interval&gt;]</code><br />
@@ -1858,7 +1915,7 @@ sub VBUSDEV_ParsePayload($@)
       <code>define VBUSDEV_7321 VBUSDEV 7321 </code><br />
     </ul>
   </ul><br />
-  <a name="VBUSDEV_Readings"></a>
+  <a name="Readings"></a>
   <b>Readings</b>
   <ul>
     <li>The readings are dependant of the model of the VBUS device.</li><br />
@@ -1880,7 +1937,7 @@ sub VBUSDEV_ParsePayload($@)
     und auch auf github <a href="https://github.com/pejonp/vbus"> https://github.com/pejonp/vbus </a><br><br><br>
 
   <br />
-  <a name="VBUSDEV_Define"></a>
+  <a name="Define"></a>
   <b>Define</b>
   <ul>
     <code>define &lt;name&gt; VBUSDEV &lt;id&gt; [&lt;interval&gt;]</code><br />
@@ -1891,7 +1948,7 @@ sub VBUSDEV_ParsePayload($@)
       <code>define VBUSDEV_7321 VBUSDEV 7321 </code><br />
     </ul>
   </ul><br />
-  <a name="VBUSDEV_Readings"></a>
+  <a name="Readings"></a>
   <b>Readings</b>
   <ul>
     <li>The readings are dependant of the model of the VBUS device.</li><br />

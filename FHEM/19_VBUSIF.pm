@@ -1,5 +1,5 @@
 ##############################################
-# $Id: 19_VBUSIF.pm 20200420 2020-04-20 10:10:10Z pejonp $
+# $Id: 19_VBUSIF.pm 20200506 2020-05-06 10:10:10Z pejonp $
 #
 # VBUS LAN Adapter Device
 # 19_VBUSIF.pm
@@ -10,6 +10,8 @@
 # (c) 2016 Tobias Faust <tobias.faust gmx net>
 # (c) 2016 Jörg (pejonp)
 # (c) 20.04.2020 Anpassungen Perl (pejonp)
+# (c) 06.05.2020 Fehlerbereinigung nach PBP (pejonp)
+# 
 ##############################################
 
 package FHEM::VBUSIF;
@@ -23,8 +25,7 @@ use GPUtils qw(GP_Import GP_Export);
 use Time::HiRes qw(gettimeofday usleep);
 use Scalar::Util qw(looks_like_number);
 use feature qw/say switch/;
-use warnings;
-use POSIX;
+use Digest::MD5;
 use FHEM::Meta;
 
 
@@ -58,8 +59,10 @@ BEGIN {
           RemoveInternalTimer
           getUniqueId
           getKeyValue
+          setKeyValue
           TimeNow
-          Dispatch )
+          Dispatch
+           )
     );
 }
 
@@ -281,8 +284,7 @@ sub Read() {
     }
     else {
         Log3 $hash->{NAME}, 4, "$name:  Read_Ende: $data ";
-
-        #return "";
+     #   return;
     }
 
     $hash->{PARTIAL} = $data;
@@ -295,7 +297,7 @@ sub Ready() {
     my $hash = shift;
     return DevIo_OpenDev( $hash, 1, "FHEM::VBUSIF::Init" )
       if ( $hash->{STATE} eq "disconnected" );
-    return 0;
+    return;
 }
 
 sub DecodePayload() {

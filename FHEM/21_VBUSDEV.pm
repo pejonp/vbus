@@ -10,6 +10,7 @@
 # (c) 2016 Tobias Faust <tobias.faust gmx net>	
 # (c) 2016 - 2020 Jörg (pejonp)
 # (c) 20.04.2020 Anpassungen Perl (pejonp)
+# (c) 15.09.2020 Fehlerbereinigung: DoTrigger eingetragen (pejonp)
 ##############################################  
 
 package FHEM::VBUSDEV;

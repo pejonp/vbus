@@ -1,5 +1,5 @@
 ##############################################
-# $Id: 21_VBUSDEV.pm 20200420 2020-04-20 10:10:10Z pejonp $
+# $Id: 21_VBUSDEV.pm 20200915 2020-09-15 10:10:10Z pejonp $
 #
 # 21_VBUSDEV.pm
 # VBUS Client Device
@@ -58,7 +58,8 @@ BEGIN {
           getUniqueId
           getKeyValue
           TimeNow
-          Dispatch )
+          Dispatch
+          DoTrigger )
     );
 }
 

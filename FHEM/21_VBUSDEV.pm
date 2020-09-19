@@ -1,5 +1,5 @@
 ##############################################
-# $Id: 21_VBUSDEV.pm 20200915 2020-09-15 10:10:10Z pejonp $
+# $Id: 21_VBUSDEV.pm 20200919 2020-09-19 10:10:10Z pejonp $
 #
 # 21_VBUSDEV.pm
 # VBUS Client Device
@@ -210,6 +210,21 @@ my %VBUS_devices = (
 			{ "offset" =>  8,"name" => "WMZ1_heatquantity2","bitSize" => 16,"unit" => "kWh" },
 			{ "offset" =>  10,"name" => "WMZ1_heatquantity3","bitSize" => 16,"unit" => "MWh" },
 			]},
+  "1121" => {"name" => "DeltaSol_CS2", "cmd" => "0100", "fields" => [ 	
+			{ "offset" =>  0,"name" => "Temperatur_Sensor1","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  2,"name" => "Temperatur_Sensor2","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  4,"name" => "Temperatur_Sensor3","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  6,"name" => "Temperatur_Sensor4","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+      { "offset" =>  8,"name" => "Temperatur_Sensor5","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" => 10, "name" => "Volumenstrom", "bitSize" => 31, "factor" => 1, "unit" => "1/min" },
+			{ "offset" => 12,"name" => "Drehzahl_Relais","bitSize" => 8,"unit" => "%"  },
+      { "offset" => 14,"name" => "Betriebsstunden_Relais","bitSize" => 16, "unit" => "h" },
+      { "offset" => 16,"name" => "UnitType","bitSize" => 8 },
+     	{ "offset" => 24,"name" => "Waermemenge1","bitSize" => 8,"factor" => 1,"unit" => "Wh" },
+			{ "offset" => 25,"name" => "Waermemenge2","bitSize" => 8,"factor" => 100,"unit" => "Wh" },
+      { "offset" => 26,"name" => "Waermemenge3","bitSize" => 8,"factor" => 10000,"unit" => "Wh" },
+			{ "offset" => 27,"name" => "Waermemenge4","bitSize" => 8,"factor" => 10000000,"unit" => "Wh" },
+  		]},
 	"1140" => {"name" => "DeltaThermHC_mini_HK", "cmd" => "0100", "fields" => [ 	
 			{ "offset" =>  0,"name" => "HK_VorlaufSoll","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
 			{ "offset" =>  2,"name" => "HK_Betriebsstatus","bitSize" => 8,"factor" => 1 },
@@ -251,7 +266,7 @@ my %VBUS_devices = (
 			{ "offset" => 12,"name" => "Drehzahl_Relais2","bitSize" => 8,"unit" => "%"  },
 			{ "offset" => 14,"name" => "Betriebsstunden_Relais2","bitSize" => 16, "unit" => "h" },
 			{ "offset" => 16,"name" => "UnitType","bitSize" => 8 },
-			{ "offset" => 16,"name" => "System","bitSize" => 16 },
+			{ "offset" => 17,"name" => "System","bitSize" => 16 },
 			{ "offset" => 28,"name" => "Waermemenge1","bitSize" => 8,"factor" => 1,"unit" => "Wh" },
 			{ "offset" => 29,"name" => "Waermemenge2","bitSize" => 8,"factor" => 100,"unit" => "Wh" },
 			{ "offset" => 30,"name" => "Waermemenge3","bitSize" => 8,"factor" => 10000,"unit" => "Wh" },

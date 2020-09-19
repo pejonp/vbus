@@ -40,7 +40,7 @@ Hier die schon hinterlegten Geräte.
 |1065|Vitosolic200_WMZ1|
 |1066|Vitosolic200_WMZ2|
 |1059|DeltaThermHC_mini_Regler| 23.08.2016
-|1121|DeltaSol_CS2| 18.03.2017
+|1121|DeltaSol_CS2| 19.09.2020 
 |1140|DeltaThermHC_mini_HK| 23.08.2016
 |1240|Wagner_Sungo_100_Regler| 14.12.2017
 |1241|Wagner_Sungo_100_WMZ1| 14.12.2017

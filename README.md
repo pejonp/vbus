@@ -45,6 +45,7 @@ Hier die schon hinterlegten Geräte.
 |1240|Wagner_Sungo_100_Regler| 14.12.2017
 |1241|Wagner_Sungo_100_WMZ1| 14.12.2017
 |2211|DeltaSol_CS_Plus| 20.02.2022
+|2213|DeltaSol_CS_Plus2| 03.07.2022
 |2231|Oranier_HK_Regler| 14.04.2017
 |2232|Oranier_HK_WMZ1| 14.04.2017
 |2251|DeltaSol_SL|

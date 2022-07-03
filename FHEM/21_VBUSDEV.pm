@@ -11,7 +11,6 @@
 # (c) 2016 - 2020 Jörg (pejonp)
 # (c) 20.04.2020 Anpassungen Perl (pejonp)
 # (c) 15.09.2020 Fehlerbereinigung: DoTrigger eingetragen (pejonp)
-# (c) 20.02.2022 2211 Erweiterungen Offset:20,32,36,38 (pejonp)
 ##############################################  
 
 package FHEM::VBUSDEV;
@@ -268,19 +267,36 @@ my %VBUS_devices = (
 			{ "offset" => 14,"name" => "Betriebsstunden_Relais2","bitSize" => 16, "unit" => "h" },
 			{ "offset" => 16,"name" => "UnitType","bitSize" => 8 },
 			{ "offset" => 17,"name" => "System","bitSize" => 16 },
-            { "offset" => 20, "name" => "Fehlermaske", "bitSize" => 16},
-            { "offset" => 20, "name" => "Fehler_Sensor1", "bitSize" => 1, "bitPos" => 0 },
-            { "offset" => 20, "name" => "Fehler_Sensor2", "bitSize" => 1, "bitPos" => 1 },
-            { "offset" => 20, "name" => "Fehler_Sensor3", "bitSize" => 1, "bitPos" => 2 },
-            { "offset" => 20, "name" => "Fehler_Sensor4", "bitSize" => 1, "bitPos" => 3 },
-            { "offset" => 22, "name" => "Systemzeit", "bitSize" => 15, "timeRef" => 1 },
 			{ "offset" => 28,"name" => "Waermemenge1","bitSize" => 8,"factor" => 1,"unit" => "Wh" },
 			{ "offset" => 29,"name" => "Waermemenge2","bitSize" => 8,"factor" => 100,"unit" => "Wh" },
 			{ "offset" => 30,"name" => "Waermemenge3","bitSize" => 8,"factor" => 10000,"unit" => "Wh" },
 			{ "offset" => 31,"name" => "Waermemenge4","bitSize" => 8,"factor" => 10000000,"unit" => "Wh" },
-            { "offset" => 32, "name" => "SW-Version", "bitSize" => 15, "factor" => 0.01 },
-            { "offset" => 36, "name" => "Temperatur_VFD" , "bitSize" => 15, "factor" => 0.1, "unit" => "°C" },
-            { "offset" => 38, "name" => "Volumenstrom_VFD", "bitSize" => 31, "factor" => 1, "unit" => "l/h" },
+            { "offset" => 36,"name" => "Temperatur_Sensor5","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+            { "offset" => 38,"name" => "Flow_Rate_1","bitSize" => 15,"unit" => "l/h" },
+			]},
+    "2213" => {"name" => "DeltaSol_CS_Plus2", "cmd" => "0100", "fields" => [ 	  
+			{ "offset" =>  0,"name" => "Temperatur_Sensor1","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  2,"name" => "Temperatur_Sensor2","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  4,"name" => "Temperatur_Sensor3","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  6,"name" => "Temperatur_Sensor4","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+			{ "offset" =>  8,"name" => "Pumpe_Drehzahl_Relais1","bitSize" => 8, "unit" => "%" },
+			{ "offset" => 10,"name" => "Betriebsstunden_Relais1","bitSize" => 16, "unit" => "h" },
+			{ "offset" => 12,"name" => "Pumpe_Drehzahl_Relais2","bitSize" => 8,"unit" => "%"  },
+			{ "offset" => 14,"name" => "Betriebsstunden_Relais2","bitSize" => 16, "unit" => "h" },
+			{ "offset" => 16,"name" => "UnitType","bitSize" => 8 },
+			{ "offset" => 17,"name" => "System","bitSize" => 16 },
+            { "offset" => 20,"name" => "ErrorMask","bitSize" => 8 },
+			{ "offset" => 28,"name" => "Waermemenge1","bitSize" => 8,"factor" => 1,"unit" => "Wh" },
+			{ "offset" => 29,"name" => "Waermemenge2","bitSize" => 8,"factor" => 100,"unit" => "Wh" },
+			{ "offset" => 30,"name" => "Waermemenge3","bitSize" => 8,"factor" => 10000,"unit" => "Wh" },
+			{ "offset" => 31,"name" => "Waermemenge4","bitSize" => 8,"factor" => 10000000,"unit" => "Wh" },
+            { "offset" => 36,"name" => "Temperatur_GFD","bitSize" => 15,"factor" => 0.1,"unit" => "°C" },
+            { "offset" => 38,"name" => "Flow_Rate_1","bitSize" => 15,"unit" => "l/h" },
+            { "offset" => 40,"name" => "Flow_Rate_2","bitSize" => 15,"unit" => "l/h" },
+            { "offset" => 44, "name" => "PFB1_Duty_1", "bitSize" => 7, "factor" => 1, "unit" => "%" },
+			{ "offset" => 45, "name" => "PFB1_Duty_2", "bitSize" => 7, "factor" => 1, "unit" => "%" },
+			{ "offset" => 46, "name" => "PFB1_Duty_3", "bitSize" => 7, "factor" => 1, "unit" => "%" },
+			{ "offset" => 47, "name" => "PFB1_Duty_4", "bitSize" => 7, "factor" => 1, "unit" => "%" },
 			]},
 	"2231" => {"name" => "Oranier_HK_Regler", "cmd" => "0100", "fields" => [
 			{ "offset" => 0, "name" => "Kollektor", "bitSize" => 15, "factor" => 1, "unit" => "°C" },

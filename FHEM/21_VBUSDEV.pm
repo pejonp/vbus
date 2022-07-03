@@ -1,5 +1,5 @@
 ##############################################
-# $Id: 21_VBUSDEV.pm 20200919 2020-09-19 10:10:10Z pejonp $
+# $Id: 21_VBUSDEV.pm 03072022 2022-07-03 10:10:10Z pejonp $
 #
 # 21_VBUSDEV.pm
 # VBUS Client Device
@@ -11,6 +11,8 @@
 # (c) 2016 - 2020 Jörg (pejonp)
 # (c) 20.04.2020 Anpassungen Perl (pejonp)
 # (c) 15.09.2020 Fehlerbereinigung: DoTrigger eingetragen (pejonp)
+# (c) 20.02.2022 2211 Erweiterungen Offset:20,32,36,38 (pejonp) 
+# (c) 03.07.2022 2213 Erweiterungen  (pejonp)
 ##############################################  
 
 package FHEM::VBUSDEV;
